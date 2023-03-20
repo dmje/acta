@@ -53,7 +53,7 @@ function origin_update_gp_field_group($group) {
   // list of field groups that should be saved to my-plugin/acf-json
   $groups = array(
 		//------------------- Global stuff --------------------------//
-		'group_5e220bbeecb8e',			// Sidebar Selection		
+		'group_6418684092743',			// What's on fields		
   );
 
   if (in_array($group['key'], $groups)) {
