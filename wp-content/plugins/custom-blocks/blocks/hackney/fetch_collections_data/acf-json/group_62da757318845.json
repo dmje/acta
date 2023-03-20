@@ -1,0 +1,60 @@
+{
+    "key": "group_62da757318845",
+    "title": "Hackney Object Fetcher",
+    "fields": [
+        {
+            "key": "field_62da85cb3e87c",
+            "label": "Object URL",
+            "name": "object_url",
+            "type": "url",
+            "instructions": "Paste in the public URL of the object page from https:\/\/museum-collection.hackney.gov.uk\/",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_62e15dfe312c1",
+            "label": "Caption",
+            "name": "object_caption",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/custom-block-hackney-hackney-fetch-object"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1658936896
+}

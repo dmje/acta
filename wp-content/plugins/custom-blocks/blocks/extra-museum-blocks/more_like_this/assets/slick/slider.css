@@ -1,0 +1,102 @@
+/* slider css */
+/*the container*/
+.tmp-slider-container {
+  background: var(--tmp-slider-bg-color,#fff);
+}
+
+/* attached to slides that have a text overlay */
+.tmp-slider--text-overlay {
+  position: relative;
+}
+
+/*media container*/
+.tmp-slider__media {
+	text-align: center;
+}
+/*the actual image*/
+.tmp-slider__image {
+	object-fit:contain;
+
+}
+.tmp-slider__content {
+  padding: 1rem;
+}
+
+/*and when it's expecting a text overlay*/
+.tmp-slider--text-overlay .tmp-slider__content {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 !important;	
+}
+
+.tmp-slider--text-overlay .tmp-slider__title {
+  display: inline-block;
+  background: var(--tmp-slider-title-bg-color,rgba(38,38,38,0.82)) !important;
+  color: var(--sidebar-widget-title-color,#ffffff) !important;
+  padding: 0.8rem 1.6rem;
+  margin: 0;
+}
+
+.tmp-slider--text-overlay  .tmp-slider__blurb {
+  display: inline-block;
+  background: var(--tmp-slider-text-bg-color,rgba(38,38,38,0.82)) !important;
+  color: var(--tmp-slider-text-color,#ffffff) !important;
+  padding: 0.5rem 1rem;
+  margin: 0;
+}
+
+.tmp-slider__title a {
+  color: var(--tmp-slider-link-color,#ffffff) !important;
+}
+
+.tmp-slider__title a:hover {
+  color: var(--tmp-slider-link-hover-color,#1e73be) !important;
+}
+
+/*paragraphs when in the blurb*/
+.tmp-slider__blurb p {
+  margin: 0;
+}
+
+/*the buttons*/
+.tmp-slider-container .swiper-pagination-bullets {
+  bottom: 10px !important;
+}
+
+.tmp-slider-container.tmp-slider-container--text-overlay .swiper-pagination-bullets {
+  bottom: 10px !important;
+}
+
+.swiper-pagination-bullet {
+  background: rgba(0,0,0,0.6) !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--swiper-navigation-color,rgba(3,3,3,0.8)) !important;
+}
+
+
+/*
+.swiper-button-next,
+.swiper-button-prev {
+
+}
+
+
+
+To constrain the overall height of the slider and slides, as well as overwrite the styles above, use the Customizer's Additional CSS 
+Good default styles for the slideshow would be something like:
+
+.tmp-slider__image {
+	height:500px;
+}
+.tmp-slider-container{
+	height:540px;
+}
+
+*/

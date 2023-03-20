@@ -1,0 +1,239 @@
+{
+    "key": "group_63765f2269898",
+    "title": "Before \/ After Slider",
+    "fields": [
+        {
+            "key": "field_63779c7a75d21",
+            "label": "\"Before\" image type",
+            "name": "before_image_type",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "aria-label": "",
+            "choices": {
+                "collection_image": "Collection image",
+                "uploaded": "Uploaded image"
+            },
+            "default_value": false,
+            "return_format": "",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_63765f2209c0f",
+            "label": "\"Before\" image",
+            "name": "before_image",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_63779c7a75d21",
+                        "operator": "==",
+                        "value": "uploaded"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "aria-label": "",
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_6377922aba1bc",
+            "label": "\"Before\" Image",
+            "name": "before_collection_image",
+            "type": "es_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_63779c7a75d21",
+                        "operator": "==",
+                        "value": "collection_image"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "aria-label": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "uuid",
+            "ui": 1
+        },
+        {
+            "key": "field_63779ce575d22",
+            "label": "\"After\" image type",
+            "name": "after_image_type",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "aria-label": "",
+            "choices": {
+                "collection_image": "Collection image",
+                "uploaded": "Uploaded image"
+            },
+            "default_value": false,
+            "return_format": "",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_63765f4009c10",
+            "label": "\"After\" image",
+            "name": "after_image",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_63779ce575d22",
+                        "operator": "==",
+                        "value": "uploaded"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "aria-label": "",
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_63779265ba1bd",
+            "label": "\"After\" Image",
+            "name": "after_collection_image",
+            "type": "es_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_63779ce575d22",
+                        "operator": "==",
+                        "value": "collection_image"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "aria-label": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "uuid",
+            "ui": 1
+        },
+        {
+            "key": "field_6377a23c752be",
+            "label": "Image Width",
+            "name": "image_width",
+            "type": "range",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "aria-label": "",
+            "default_value": 800,
+            "min": 100,
+            "max": 1000,
+            "step": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6377a2768a4f1",
+            "label": "Image Height",
+            "name": "image_height",
+            "type": "range",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "aria-label": "",
+            "default_value": 500,
+            "min": 100,
+            "max": 1000,
+            "step": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/custom-block-extra-museum-blocks-before-after"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1669139918
+}

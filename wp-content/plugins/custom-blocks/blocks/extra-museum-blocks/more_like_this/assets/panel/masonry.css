@@ -1,0 +1,38 @@
+/*
+Colour variables
+*/
+:root{
+  --accent-bg-colour:#eeeeee;
+}
+
+/*
+Masonry object list
+*/
+.object-list {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+  grid-auto-rows: 20px;
+}
+
+.object-list__inner {
+  margin: 0;
+  background: var(--accent-bg-colour,white);
+  border-radius: 4px;
+  padding: 0;
+}
+
+.object-list__inner:hover {
+  background: #e1e1e1;
+}
+
+.object-list__inner img {
+  display: block;
+  margin: 0;
+}
+
+.object-list__title {
+  font-size: 1rem;
+  margin: 0;
+  padding: 10px;
+}

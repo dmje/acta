@@ -1,0 +1,66 @@
+{
+    "key": "group_637cde966ea09",
+    "title": "Random item block",
+    "fields": [
+        {
+            "key": "field_637cdfdbb2960",
+            "label": "Search URL",
+            "name": "random_item_search_url",
+            "type": "url",
+            "instructions": "The URL of a search for a subset of items from which you want the random item selected)\r\nIf you leave it empty, the selection will be from the whole collection.\r\nNOTE: the random selection will actually be from in the first 10,000 items of the set",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "Search URL"
+        },
+        {
+            "key": "field_637ce07db2961",
+            "label": "Display options",
+            "name": "random_item_display_options",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "umi": "Standard - image with title, description and link",
+                "plain": "Linked image only"
+            },
+            "default_value": "umi",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/custom-block-extra-museum-random-item"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1669138030
+}

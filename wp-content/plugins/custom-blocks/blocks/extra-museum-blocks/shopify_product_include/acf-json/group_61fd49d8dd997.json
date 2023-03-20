@@ -1,0 +1,40 @@
+{
+    "key": "group_61fd49d8dd997",
+    "title": "Shopify Include",
+    "fields": [
+        {
+            "key": "field_61fd4a1ce2817",
+            "label": "Shopify URL",
+            "name": "shopify_url",
+            "type": "url",
+            "instructions": "Paste in the full URL of the Shopify product page - example https:\/\/shop.wienerholocaustlibrary.org\/products\/berlin-london-the-lost-photographs-of-gerty-simon",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/custom-block-extra-museum-blocks-shopify-product-include"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1643991652
+}

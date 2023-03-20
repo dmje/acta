@@ -1,0 +1,17 @@
+/* Call to action block */
+
+.cta{
+	background-color:#b30000;
+	border:2px solid #cccccc;
+	margin:20px;
+	padding:20px;
+}
+
+.cta h2{
+	color:#ffffff;
+}
+
+.cta a{
+	color:#ffffff;
+	text-decoration: underline;
+}

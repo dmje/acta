@@ -1,0 +1,153 @@
+{
+    "key": "group_627a6c96f3baa",
+    "title": "More Like This",
+    "fields": [
+        {
+            "key": "field_627a6c9714e8e",
+            "label": "Linked Object",
+            "name": "linked_object",
+            "type": "es_object",
+            "instructions": "Select object to feature",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f899fb7a10a9",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "uuid",
+            "ui": 1
+        },
+        {
+            "key": "field_627a6c9718902",
+            "label": "Max results",
+            "name": "max_results",
+            "type": "number",
+            "instructions": "What is the maximum number of things \"like this\" to return? The number actually displayed may depend on the display template selected. Default is 5",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 5,
+            "placeholder": 5,
+            "prepend": "",
+            "append": "",
+            "min": 1,
+            "max": 36,
+            "step": ""
+        },
+        {
+            "key": "field_627e1c3e5cdd2",
+            "label": "Display style",
+            "name": "display",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "slider": "Slider\/carousel",
+                "panel": "Panel"
+            },
+            "default_value": false,
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_627cf358d7dbf",
+            "label": "Heading",
+            "name": "heading",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_627cf370d7dc0",
+            "label": "Blurb",
+            "name": "blurb",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_627cf38cd7dc1",
+            "label": "Post blurb",
+            "name": "post_blurb",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/custom-block-extra-museum-blocks-more-like-this-selector"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1652438532
+}
