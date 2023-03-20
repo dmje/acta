@@ -1,0 +1,13 @@
+{
+	"name": "acf/carousel",
+	"title": "Carousel",
+	"description": "Simple carousel",
+	"category": "thirty8",
+	"icon": "admin-comments",
+	"keywords": ["carousel", "slider", "swiper"],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "block.php"
+	},
+	"align": "full"
+}
