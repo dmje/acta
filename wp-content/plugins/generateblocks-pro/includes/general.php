@@ -76,6 +76,9 @@ function generateblocks_pro_do_block_editor_assets() { // phpcs:ignore
 			'enableRemoteTemplates' => $admin_settings['enable_remote_templates'],
 			'enableLocalTemplates' => $admin_settings['enable_local_templates'],
 			'isACFActive' => class_exists( 'ACF' ),
+			'generateblocksVersion' => GENERATEBLOCKS_VERSION,
+			'generateblocksProVersion' => GENERATEBLOCKS_PRO_VERSION,
+			'blockStyles' => function_exists( 'generateblocks_get_default_styles' ) ? generateblocks_get_default_styles() : array(),
 		)
 	);
 
@@ -351,4 +354,22 @@ function generateblocks_pro_set_container_tagname( $tagname, $attributes ) {
 	}
 
 	return $tagname;
+}
+
+add_filter( 'register_block_type_args', 'generateblocks_pro_filter_block_type_args', 10, 2 );
+/**
+ * Filter our register_block_type() args.
+ *
+ * @param array  $args Existing args.
+ * @param string $name The block name.
+ */
+function generateblocks_pro_filter_block_type_args( $args, $name ) {
+	if ( 'generateblocks/container' === $name ) {
+		if ( ! empty( $args['editor_script_handles'] ) ) {
+			$args['editor_script_handles'] = array_merge( $args['editor_script_handles'], [ 'generateblocks-pro' ] );
+			$args['editor_style_handles'] = array_merge( $args['editor_style_handles'], [ 'generateblocks-pro' ] );
+		}
+	}
+
+	return $args;
 }

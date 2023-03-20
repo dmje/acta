@@ -27,3 +27,5 @@ require_once GENERATEBLOCKS_PRO_DIR . 'includes/extend/query-loop/class-related-
 require_once GENERATEBLOCKS_PRO_DIR . 'includes/extend/query-loop/class-related-author.php';
 require_once GENERATEBLOCKS_PRO_DIR . 'includes/extend/query-loop/class-related-terms.php';
 require_once GENERATEBLOCKS_PRO_DIR . 'includes/extend/dynamic-content/class-advanced-custom-fields.php';
+require_once GENERATEBLOCKS_PRO_DIR . 'includes/extend/interactions/class-tabs.php';
+require_once GENERATEBLOCKS_PRO_DIR . 'includes/extend/interactions/class-accordion.php';

@@ -73,13 +73,19 @@ class GenerateBlocks_Pro_Advanced_Custom_Fields extends GenerateBlocks_Pro_Singl
 	) {
 		$field = get_field( $attributes[ $metaFieldKey ], $id );
 
-		if (
-			is_array( $field ) &&
-			isset( $attributes[ $metaFieldPropertyNameKey ] ) &&
-			isset( $field[ $attributes[ $metaFieldPropertyNameKey ] ] )
-		) {
-			return $field[ $attributes[ $metaFieldPropertyNameKey ] ];
-		} elseif ( is_array( $field ) ) {
+		if ( is_array( $field ) ) {
+			if (
+				isset( $attributes[ $metaFieldPropertyNameKey ] ) &&
+				isset( $field[ $attributes[ $metaFieldPropertyNameKey ] ] )
+			) {
+				return $field[ $attributes[ $metaFieldPropertyNameKey ] ];
+			}
+
+			// This is for backwards compatibility for dynamic images using ACF image field before 1.6.
+			if ( array_key_exists( 'ID', $field ) ) {
+				return $field['ID'];
+			}
+
 			return '';
 		}
 

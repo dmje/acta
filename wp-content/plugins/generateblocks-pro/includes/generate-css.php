@@ -24,12 +24,25 @@ add_action( 'generateblocks_block_css_data', 'generateblocks_pro_generate_css', 
  */
 function generateblocks_pro_generate_css( $name, $settings, $css, $desktop_css, $tablet_css, $tablet_only_css, $mobile_css ) {
 	if ( 'container' === $name ) {
+		$blockVersion = ! empty( $settings['blockVersion'] ) ? $settings['blockVersion'] : 1;
+		$settings['useInnerContainer'] = $blockVersion < 3 || ! empty( $settings['useInnerContainer'] );
 		$css->set_selector( '.gb-container-' . $settings['uniqueId'] . ':hover' );
 		$css->add_property( 'background-color', generateblocks_hex2rgba( $settings['backgroundColorHover'], $settings['backgroundColorHoverOpacity'] ) );
 		$css->add_property( 'color', $settings['textColorHover'] );
 		$css->add_property( 'border-color', generateblocks_hex2rgba( $settings['borderColorHover'], $settings['borderColorHoverOpacity'] ) );
 
+		$current_selector = sprintf(
+			'%1$s.gb-block-is-current, %1$s.gb-block-is-current:hover, %1$s.gb-block-is-current:active, %1$s.gb-block-is-current:focus',
+			'.gb-container-' . $settings['uniqueId']
+		);
+
+		$css->set_selector( $current_selector );
+		$css->add_property( 'background-color', $settings['backgroundColorCurrent'] );
+		$css->add_property( 'color', $settings['textColorCurrent'] );
+		$css->add_property( 'border-color', $settings['borderColorCurrent'] );
+
 		if (
+			$settings['useInnerContainer'] &&
 			'hidden-link' === $settings['linkType'] &&
 			(
 				'' !== $settings['url'] ||
@@ -134,10 +147,13 @@ function generateblocks_pro_generate_css( $name, $settings, $css, $desktop_css, 
 							$effect_css->add_property( 'right', '0' );
 							$effect_css->add_property( 'bottom', '0' );
 							$effect_css->add_property( 'left', '0' );
+							$effect_css->add_property( 'pointer-events', 'none' );
 
-							$effect_css->set_selector( '.gb-container-' . $settings['uniqueId'] );
-							$effect_css->add_property( 'position', 'relative' );
-							$effect_css->add_property( 'overflow', 'hidden' );
+							if ( $settings['useInnerContainer'] ) {
+								$effect_css->set_selector( '.gb-container-' . $settings['uniqueId'] );
+								$effect_css->add_property( 'position', 'relative' );
+								$effect_css->add_property( 'overflow', 'hidden' );
+							}
 
 							if ( 'all' === $data['device'] ) {
 								$hasPseudoAfter = true;
@@ -178,9 +194,13 @@ function generateblocks_pro_generate_css( $name, $settings, $css, $desktop_css, 
 							$effect_css->add_property( 'right', '0' );
 							$effect_css->add_property( 'bottom', '0' );
 							$effect_css->add_property( 'left', '0' );
-							$effect_css->set_selector( '.gb-container-' . $settings['uniqueId'] );
-							$effect_css->add_property( 'position', 'relative' );
-							$effect_css->add_property( 'overflow', 'hidden' );
+							$effect_css->add_property( 'pointer-events', 'none' );
+
+							if ( $settings['useInnerContainer'] ) {
+								$effect_css->set_selector( '.gb-container-' . $settings['uniqueId'] );
+								$effect_css->add_property( 'position', 'relative' );
+								$effect_css->add_property( 'overflow', 'hidden' );
+							}
 
 							if ( 'all' === $data['device'] || 'desktop' === $data['device'] ) {
 								$effect_css->add_property( 'border-radius', generateblocks_get_shorthand_css( $settings['borderRadiusTopLeft'], $settings['borderRadiusTopRight'], $settings['borderRadiusBottomRight'], $settings['borderRadiusBottomLeft'], $settings['borderRadiusUnit'] ) );
@@ -226,7 +246,11 @@ function generateblocks_pro_generate_css( $name, $settings, $css, $desktop_css, 
 		}
 
 		if ( 'button' === $name ) {
-			$selector = '.gb-button-wrapper .gb-button-' . $settings['uniqueId'];
+			$blockVersion = ! empty( $settings['blockVersion'] ) ? $settings['blockVersion'] : 1;
+
+			$selector = ! empty( $settings['hasButtonContainer'] ) || $blockVersion < 3
+				? '.gb-button-wrapper .gb-button-' . $settings['uniqueId']
+				: '.gb-button-' . $settings['uniqueId'];
 		}
 
 		if ( 'image' === $name ) {
@@ -432,7 +456,7 @@ function generateblocks_pro_generate_css( $name, $settings, $css, $desktop_css, 
 
 					$transitions = implode( ' ', $transitions );
 
-					$transitionData[ $element ]['transitions'][] = $transitions;
+					$transitionData[ $element ]['transitions'][] = trim( $transitions );
 				}
 
 				foreach ( $transitionData as $target => $data ) {
@@ -459,7 +483,7 @@ function generateblocks_pro_generate_css( $name, $settings, $css, $desktop_css, 
 					$effect_css->set_selector( $data['selector'] );
 
 					if ( ! empty( $data['transitions'] ) ) {
-						$effect_css->add_property( 'transition', implode( ' ', $data['transitions'] ) );
+						$effect_css->add_property( 'transition', implode( ', ', $data['transitions'] ) );
 					}
 				}
 			}
@@ -535,7 +559,11 @@ function generateblocks_pro_generate_css( $name, $settings, $css, $desktop_css, 
 		} elseif ( 'button-container' === $name ) {
 			$selector = '.gb-button-wrapper-' . $settings['uniqueId'];
 		} elseif ( 'button' === $name ) {
-			$selector = '.gb-button-wrapper .gb-button-' . $settings['uniqueId'];
+			$blockVersion = ! empty( $settings['blockVersion'] ) ? $settings['blockVersion'] : 1;
+
+			$selector = ! empty( $settings['hasButtonContainer'] ) || $blockVersion < 3
+				? '.gb-button-wrapper .gb-button-' . $settings['uniqueId']
+				: '.gb-button-' . $settings['uniqueId'];
 		} elseif ( 'headline' === $name ) {
 			$selector = $settings['element'] . '.gb-headline-' . $settings['uniqueId'];
 		} elseif ( 'grid' === $name ) {

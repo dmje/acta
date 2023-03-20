@@ -47,6 +47,9 @@ function generateblocks_pro_set_block_defaults( $defaults ) {
 	$defaults['container']['hideOnMobile'] = false;
 	$defaults['container']['useGlobalStyle'] = false;
 	$defaults['container']['globalStyleId'] = '';
+	$defaults['container']['backgroundColorCurrent'] = '';
+	$defaults['container']['textColorCurrent'] = '';
+	$defaults['container']['borderColorCurrent'] = '';
 
 	$defaults['buttonContainer']['hideOnDesktop'] = false;
 	$defaults['buttonContainer']['hideOnTablet'] = false;

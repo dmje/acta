@@ -4,17 +4,11 @@ import GlobalStylePicker from '../../../components/global-style-picker';
 /**
  * WordPress Dependencies
  */
-import {
-	__,
-} from '@wordpress/i18n';
-
-import {
-	addFilter,
-} from '@wordpress/hooks';
-
-import {
-	Fragment,
-} from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
+import { addFilter } from '@wordpress/hooks';
+import { Fragment } from '@wordpress/element';
+import { InspectorControls } from '@wordpress/block-editor';
+import { createHigherOrderComponent } from '@wordpress/compose';
 
 const allowedBlocks = [
 	'generateblocks/container',
@@ -74,17 +68,13 @@ function addAttributes( settings ) {
 	return settings;
 }
 
-function addControls( output, id, props ) {
-	if ( 'afterResponsiveTabs' !== id ) {
-		return output;
-	}
-
+const withGlobalStyleControls = createHigherOrderComponent( ( BlockEdit ) => ( props ) => {
 	const {
 		name,
 	} = props;
 
 	if ( ! allowedBlocks.includes( name ) ) {
-		return output;
+		return <BlockEdit { ...props } />;
 	}
 
 	const blockName = name.replace( 'generateblocks/', '' );
@@ -116,20 +106,22 @@ function addControls( output, id, props ) {
 	}
 
 	if ( ! generateBlocksPro.isGlobalStyle && globalIdOptions.length < 2 ) {
-		return output;
+		return <BlockEdit { ...props } />;
 	}
 
 	return (
 		<Fragment>
-			<GlobalStylePicker
-				{ ...props }
-				options={ globalIdOptions }
-			/>
+			<InspectorControls>
+				<GlobalStylePicker
+					{ ...props }
+					options={ globalIdOptions }
+				/>
+			</InspectorControls>
 
-			{ output }
+			<BlockEdit { ...props } />
 		</Fragment>
 	);
-}
+}, 'withGlobalStyleControls' );
 
 function addCustomAttributes( blockHtmlAttributes, blockName, blockAttributes ) {
 	if ( ! allowedBlocks.includes( blockName ) ) {
@@ -195,7 +187,21 @@ function filterCSS( attributes, props ) {
 			defaultBlockName = 'image';
 		}
 
+		const toggledAttributes = {
+			boxShadows: 'useBoxShadow',
+			filters: 'useFilter',
+			opacities: 'useOpacity',
+			textShadows: 'useTextShadow',
+			transforms: 'useTransform',
+			transition: 'useTransition',
+			advBackgrounds: 'useAdvBackgrounds',
+		};
+
 		const newAttrs = Object.assign( {}, attributes );
+
+		if ( ! globalAttrs.sizing ) {
+			globalAttrs.sizing = {};
+		}
 
 		Object.keys( globalAttrs ).forEach( ( attribute ) => {
 			let hasValue = !! attributes[ attribute ] || 0 === attributes[ attribute ];
@@ -204,7 +210,55 @@ function filterCSS( attributes, props ) {
 				hasValue = attributes[ attribute ].length > 0;
 			}
 
+			if ( 'object' === typeof attributes[ attribute ] ) {
+				hasValue = Object.keys( attributes[ attribute ] ).length;
+			}
+
+			// Make sure the option is turned on using its toggle.
+			if ( attribute in toggledAttributes ) {
+				hasValue = !! attributes[ toggledAttributes[ attribute ] ];
+			}
+
 			if ( ! noStyleAttributes.includes( attribute ) && ( ! hasValue || attributes[ attribute ] === generateBlocksDefaults[ defaultBlockName ][ attribute ] ) ) {
+				// Migrate old button layout.
+				if ( 'button' === defaultBlockName && ( ! globalAttrs.blockVersion || globalAttrs?.blockVersion < 3 ) ) {
+					globalAttrs.display = 'inline-flex';
+					globalAttrs.alignItems = 'center';
+					globalAttrs.justifyContent = 'center';
+					globalAttrs.alignment = 'center';
+				}
+
+				// Migrate old sizing values.
+				if ( 'container' === defaultBlockName && ( ! globalAttrs.blockVersion || globalAttrs?.blockVersion < 3 ) ) {
+					if ( globalAttrs.width ) {
+						globalAttrs.sizing.width = String( globalAttrs.width + '%' );
+					}
+
+					if ( globalAttrs.widthTablet ) {
+						globalAttrs.sizing.widthTablet = globalAttrs.autoWidthTablet
+							? 'auto'
+							: String( globalAttrs.widthTablet + '%' );
+					}
+
+					if ( globalAttrs.widthMobile ) {
+						globalAttrs.sizing.widthMobile = globalAttrs.autoWidthMobile
+							? 'auto'
+							: String( globalAttrs.widthMobile + '%' );
+					}
+
+					if ( globalAttrs.minHeight ) {
+						globalAttrs.sizing.minHeight = String( globalAttrs.minHeight + globalAttrs.minHeightUnit );
+					}
+
+					if ( globalAttrs.minHeightTablet ) {
+						globalAttrs.sizing.minHeightTablet = String( globalAttrs.minHeightTablet + globalAttrs.minHeightUnitTablet );
+					}
+
+					if ( globalAttrs.minHeightMobile ) {
+						globalAttrs.sizing.minHeightMobile = String( globalAttrs.minHeightMobile + globalAttrs.minHeightUnitMobile );
+					}
+				}
+
 				newAttrs[ attribute ] = globalAttrs[ attribute ];
 			}
 		} );
@@ -228,10 +282,9 @@ addFilter(
 );
 
 addFilter(
-	'generateblocks.editor.controls',
+	'editor.BlockEdit',
 	'generateblocks-pro/global-styles/add-controls',
-	addControls,
-	20
+	withGlobalStyleControls
 );
 
 addFilter(

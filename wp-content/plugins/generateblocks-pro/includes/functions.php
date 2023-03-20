@@ -58,7 +58,14 @@ function generateblocks_pro_get_effect_selector( $effect_data, $settings, $selec
 
 	if ( isset( $effect_data[ $key ]['target'] ) && 'self' !== $effect_data[ $key ]['target'] ) {
 		if ( 'innerContainer' === $effect_data[ $key ]['target'] ) {
-			$effectSelector = '.gb-container-' . $settings['uniqueId'] . $state . ' > .gb-inside-container';
+			$blockVersion = ! empty( $settings['blockVersion'] ) ? $settings['blockVersion'] : 1;
+			$useInnerContainer = $blockVersion < 3 || ! empty( $settings['useInnerContainer'] );
+
+			if ( ! $useInnerContainer ) {
+				$effectSelector = '.gb-container-' . $settings['uniqueId'] . $state . ' > .gb-container';
+			} else {
+				$effectSelector = '.gb-container-' . $settings['uniqueId'] . $state . ' > .gb-inside-container';
+			}
 		}
 
 		if ( 'backgroundImage' === $effect_data[ $key ]['target'] ) {
@@ -67,6 +74,10 @@ function generateblocks_pro_get_effect_selector( $effect_data, $settings, $selec
 
 		if ( 'icon' === $effect_data[ $key ]['target'] ) {
 			$effectSelector = $selector . $state . ' .gb-icon';
+		}
+
+		if ( 'accordionContent' === $effect_data[ $key ]['target'] ) {
+			$effectSelector = $selector . $state . ' > .gb-accordion__content';
 		}
 
 		if ( 'customSelector' === $effect_data[ $key ]['target'] ) {

@@ -3,9 +3,9 @@ Contributors: edge22
 Donate link: https://generateblocks.com
 Tags: blocks, gutenberg, container, headline, grid, columns, page builder, wysiwyg, block editor
 Requires at least: 5.6
-Tested up to: 6.0
+Tested up to: 6.1
 Requires PHP: 5.6
-Stable tag: 1.4.0
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,6 +24,35 @@ Check out our [documentation](https://docs.generateblocks.com) for more informat
 To learn how to install GenerateBlocks Pro, check out our documentation [here](https://docs.generateblocks.com/article/installing-generateblocks-pro).
 
 == Changelog ==
+
+= 1.5.2 =
+* Tweak: Improve tab templates on mobile
+* Fix: Missing global style sizing attributes in editor
+* Fix: Dynamic tab/accordion buttons
+
+= 1.5.1 =
+* Fix: Filter editor.blockEdit breaking blocks
+* Fix: Tab buttons breaking when non-button siblings exist
+
+= 1.5.0 =
+* Feature: New Tabs block variation
+* Feature: New Accordion block variation
+* Feature: Integrate Effects with new inner container (GB 1.7)
+* Feature: Integrate with position and overflow options (GB 1.7)
+* Feature: Require certain versions in Pattern Library
+* Tweak: Update pattern library icon
+* Tweak: Add Effects panel using BlockEdit filter
+* Tweak: Add Global Styles using BlockEdit filter
+* Tweak: Improve Effects/Advanced BGs UI
+* Tweak: Update generateblocks-pro.pot
+* Tweak: Move Pattern Library to end of block list
+* Tweak: Add pointer-events: none to pseudo backgrounds
+* Fix: Dynamic image backwards compatibility with ACF integration
+* Fix: Editor styles not loading in tablet/mobile previews in Firefox
+* Fix: Check the useEffect attributes when showing global styles
+* Fix: Check objects in Global Styles
+* Fix: Pattern Library loading icon position
+* Fix: Syntax when using multiple transition on one element
 
 = 1.4.0 =
 * Feature: Integrate ACF with dynamic content options

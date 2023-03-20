@@ -5,7 +5,7 @@
  * Description: GenerateBlocks Pro adds more great features to GenerateBlocks without sacrificing usability or performance.
  * Author: Tom Usborne
  * Author URI: https://tomusborne.com
- * Version: 1.4.0
+ * Version: 1.5.2
  * Requires at least: 5.6
  * Requires PHP: 5.6
  * License: GPL2+
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GENERATEBLOCKS_PRO_VERSION', '1.4.0' );
+define( 'GENERATEBLOCKS_PRO_VERSION', '1.5.2' );
 define( 'GENERATEBLOCKS_PRO_DIR', plugin_dir_path( __FILE__ ) );
 define( 'GENERATEBLOCKS_PRO_DIR_URL', plugin_dir_url( __FILE__ ) );
 
