@@ -99,5 +99,82 @@ function thirty8_gp_cultureobject_permalink( $args, $post_type )
 }
 add_filter( 'register_post_type_args', 'thirty8_gp_cultureobject_permalink', 10, 2 );
 
+
+// Generic function to get item details
+
+// Return item description - used on repeater feature and search
+
+function thirty8_get_item_details($postid)
+{
+	$item_details = array();
+	$image_size = '625x465';
+	
+	// Set defaults
+	
+		// Title
+		$item_details['title'] = get_the_title($postid);
+		
+		// Image 
+		$attachment_id = get_post_thumbnail_id($postid);	
+		
+		// Short Description
+		$item_details['short_desc'] = 'The short desc';
+
+	if(!$attachment_id)
+	{
+		if ( get_field( 'default_thumbnail', 'option' ))
+		{
+			$image_id = get_field( 'default_thumbnail', 'option' );
+			$image = wp_get_attachment_image_src($image_id,$image_size); 
+			$item_details['image_src'] = $image[0];
+			$item_details['image_alt'] = 'Default image';			
+		}
+	} 
+	else 
+	{
+		$imagesrc = wp_get_attachment_image_src( $attachment_id, $image_size );
+		$item_details['image_src'] = $imagesrc[0];
+		$item_details['image_alt'] = get_post_meta($attachment_id , '_wp_attachment_image_alt', true);
+		
+		if(!$item_details['image_alt'])
+		{
+			$item_details['image_alt'] = get_the_title($postid);
+		}
+	}
+	
+	switch (get_post_type($postid)) 
+	{
+		
+
+		
+		case 'page':
+		
+			$item_details['post_type_display'] = 'Page';
+			$item_details['short_desc'] = get_field('page_summary',$postid);
+
+		break;
+
+		case 'post':
+		
+			$item_details['post_type_display'] = 'News article';
+			$item_details['short_desc'] = get_the_excerpt();
+
+		break;
+				
+		case 'tribe_events':
+		
+			$item_details['post_type_display'] = 'Event';			
+			$item_details['short_desc'] = get_the_excerpt($postid);
+					
+		break;
+		
+
+	}	
+	
+	
+	return $item_details;
+}
+
+
 ?>
 

@@ -5,61 +5,57 @@
 	global $post;
 	
 	if ($post->post_type == "page"){
-	
-		$selected = (get_field('sidebar_selection'));		
-		$post_object = get_field('choose_sidebar');
-		$post = $post_object;
-		setup_postdata( $post );
-		$post_id = $post->ID;
-	
-				
-		switch($selected){
-	
-			case 'existing' :
-	
-				if( have_rows('sidebar_block', $post_id) ):
-	
-					while ( have_rows('sidebar_block', $post_id) ) : the_row(); 
-					
-						include('sidebar-switcher.php');
-	
-					endwhile;
-	
-				endif;
-	
-				wp_reset_postdata();
-	
-			break;
-	
-			case 'custom' :
+
+		// Get whether existing or custom sidebar selection
+		$selected = (get_field('sidebar_selection'));			
+
+		if($selected == 'existing'){
+
+			// It's an existing sidebar
+			
+			$post_object = get_field('choose_sidebar');	
+			$post = $post_object;
+			setup_postdata( $post );
+			$post_id = $post->ID;
 						
-				if( have_rows('sidebar_block', $post_id) ):
-				
-					while ( have_rows('sidebar_block', $post_id) ) : the_row(); 
+			if( have_rows('sidebar_block', $post_id) ):
+
+				while ( have_rows('sidebar_block', $post_id) ) : the_row(); 
 				
 					include('sidebar-switcher.php');
-				
-					endwhile;
-					
-				endif;
-				
-				wp_reset_postdata();
-	
-			break;
-	
-			case 'default':
+
+				endwhile;
+
+			endif;
+
+			wp_reset_postdata();
 			
 			
-				echo 'Default sidebar! Fetching from global options...';
+		} else {
+
+			// It's a custom sidebar
 			
-			break;
-	
+			// Check value exists.
+			if( have_rows('sidebar_block') ):
 			
-			case '' :
+    			// Loop through rows.
+    			while ( have_rows('sidebar_block') ) : the_row();
 			
-				// nothing has been selected for the page - show nothing
-				break;
+        			include('sidebar-switcher.php');
+			
+    			// End loop.
+    			endwhile;
+			
+			// No value.
+			else :
+    			// Do something...
+			endif;
+			
+			
+			
 		}
+
+				
 
 	} elseif($post->post_type == "sc_event"){
 		

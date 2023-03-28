@@ -4,7 +4,7 @@ $featuredpage = get_sub_field("featured_page_selection");
 $featuredpage_id = $featuredpage->ID;
 
 // Use global function to get details for the linked item
-$featuredpage_details = tmp_itemdetails($featuredpage_id);
+$featuredpage_details = thirty8_get_item_details($featuredpage_id);
 					
 // Grab the bits of of the array
 $featuredpage_title = $featuredpage_details['title'];

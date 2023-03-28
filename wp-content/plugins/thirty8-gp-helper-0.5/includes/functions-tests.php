@@ -5,6 +5,21 @@
 // Hide ACF menu if you need
 //add_filter('acf/settings/show_admin', '__return_false');
 
+/**
+ * Restrict access to the locking UI to Administrators.
+ * 
+ * @param array $settings Default editor settings.
+ * @param WP_Block_Editor_Context $context The current block editor context.
+ */
+function example_theme_restrict_locking_ui( $settings, $context ) {
+    $settings[ 'canLockBlocks' ] = current_user_can( 'activate_plugins' );
+
+	return $settings;
+}
+add_filter( 'block_editor_settings_all', 'example_theme_restrict_locking_ui', 10, 2 );
+
+
+
 
 // GeneratePress theme options
 global $theme_colors;

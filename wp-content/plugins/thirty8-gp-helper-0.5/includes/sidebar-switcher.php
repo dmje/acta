@@ -29,10 +29,6 @@ switch($sidebar_row_layout)
 		$sidebar_filename = 'sidebar-post-tags.php';
 	break;
 
-	case 'newsletter_signup':
-		$sidebar_filename = 'sidebar-signup.php';
-	break;
-
 	case 'related_links':
 		$sidebar_filename = 'sidebar-related-links.php';
 	break;
@@ -45,12 +41,12 @@ switch($sidebar_row_layout)
 		$sidebar_filename = 'sidebar-share.php';
 	break;
 
-	case 'tweets':
-		$sidebar_filename = 'sidebar-tweets.php';
-	break;
-
 	case 'searchbox':
 		$sidebar_filename = 'sidebar-search.php';
+	break;
+
+	case 'shortcode_include':
+		$sidebar_filename = 'sidebar-shortcode.php';
 	break;
 
 	
