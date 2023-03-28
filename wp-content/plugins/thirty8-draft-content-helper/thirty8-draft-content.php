@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Plugin Name: Thirty8 Draft Content Helper
  * Plugin URI: http://thirty8.co.uk
  * Description: A plugin to help keep track of content migration
- * Version: 1.4
+ * Version: 1.4.1
  * Author: Mike Ellis / Thirty8 Digital
  */
 

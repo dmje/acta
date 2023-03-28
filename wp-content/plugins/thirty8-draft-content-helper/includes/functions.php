@@ -10,7 +10,8 @@ if( function_exists('acf_add_options_page') ) {
 		'menu_title'	=> 'Content Helper',
 		'menu_slug' 	=> 'content-helper-settings',
 		'capability'	=> 'edit_posts',
-		'redirect'		=> false
+		'redirect'		=> false,
+		'parent_slug'	=> 'thirty8-draft-content',
 	));
 	
 	/*

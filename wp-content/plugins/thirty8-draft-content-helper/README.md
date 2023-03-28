@@ -6,6 +6,10 @@ This plugin helps you keep track of your content as you migrate / populate a new
 
 Over time it's going to grow a bit, with some integration with some of the other tools we've been building to help shuffle content around / scrape it / otherwise reduce time fannying about when going through the process of populating a new client site.
 
+#### 22nd March 2023
+
+- Moved the content helper menu item
+
 #### 23rd February 2023
 
 - Added and tested plugin update checker from https://github.com/YahnisElsts/plugin-update-checker 
