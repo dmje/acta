@@ -5,7 +5,7 @@ Plugin URI: https://www.malcare.com
 Description: MalCare WordPress Security Plugin - Malware Scanner, Cleaner, Security Firewall
 Author: MalCare Security
 Author URI: https://www.malcare.com
-Version: 4.87
+Version: 4.97
 Network: True
  */
 
@@ -56,6 +56,8 @@ register_deactivation_hook(__FILE__, array($wp_action, 'deactivate'));
 add_action('wp_footer', array($wp_action, 'footerHandler'), 100);
 add_action('clear_bv_services_config', array($wp_action, 'clear_bv_services_config'));
 ##SOADDUNINSTALLACTION##
+
+##DISABLE_OTHER_OPTIMIZATION_PLUGINS##
 
 if (defined('WP_CLI') && WP_CLI) {
 		require_once dirname( __FILE__ ) . '/wp_cli.php';

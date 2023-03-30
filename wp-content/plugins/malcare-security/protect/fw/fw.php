@@ -255,8 +255,9 @@ class BVFW {
 
 	public function blockIfBlacklisted() {
 		if (!$this->canBypassFirewall() && $this->config->isProtecting()) {
-			if ($this->isBlacklistedIP()) {
-				$this->terminateRequest(BVWPRequest::BLACKLISTED);
+			$ip_category = $this->ipstore->getTypeIfBlacklistedIP($this->request->getIP());
+			if ($ip_category) {
+				$this->terminateRequest($ip_category);
 			}
 		}
 	}

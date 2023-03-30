@@ -175,6 +175,31 @@ function thirty8_get_item_details($postid)
 	return $item_details;
 }
 
+// ALT text fix
+// https://www.billerickson.net/code/wordpress-image-automatic-alt-text/
+// Makes sure that "later" ALT text edits are reflected on front end
+
+add_filter( 'render_block', function( $content, $block ) {
+	if( 'core/image' !== $block['blockName'] )
+		return $content;
+
+	$alt = get_post_meta( $block['attrs']['id'], '_wp_attachment_image_alt', true );
+	if( empty( $alt ) )
+		return $content;
+
+	// Empty alt
+	if( false !== strpos( $content, 'alt=""' ) ) {
+		$content = str_replace( 'alt=""', 'alt="' . $alt . '"', $content );
+
+	// No alt
+	} elseif( false === strpos( $content, 'alt="' ) ) {
+		$content = str_replace( 'src="', 'alt="' . $alt . '" src="', $content );
+	}
+
+	return $content;
+}, 10, 2 );
+
+
 
 ?>
 

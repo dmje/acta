@@ -3,6 +3,26 @@
     "title": "Block Patterns",
     "fields": [
         {
+            "key": "field_6425621aa1012",
+            "label": "Is core block pattern",
+            "name": "is_core_block_pattern",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Check the box if you want this block pattern to be given a category of \"thirty8\". If you leave it unchecked, the block pattern will have a category of this site name.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
             "key": "field_640b51e0b58fc",
             "label": "Description",
             "name": "description",
@@ -41,5 +61,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1678468312
+    "modified": 1680171661
 }

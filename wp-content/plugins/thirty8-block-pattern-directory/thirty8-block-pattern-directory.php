@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Plugin Name: Thirty8 Block Pattern Directory
  * Plugin URI: http://thirty8.co.uk
  * Description: Block Patterns in the WordPress GUI
- * Version: 0.2
+ * Version: 0.3
  * Author: Mike Ellis / Thirty8 Digital
  */
  
@@ -145,6 +145,16 @@ function create_block_patterns(){
 			$blockpattern_description = get_field('description');
 			
 			$block_pattern_keywords = wp_get_post_terms( $post->ID, 'thirty8_bpkeyword', array( 'fields' => 'names' ) );
+
+			// Checkbox in the block pattern
+			$is_core_block_pattern = get_field('is_core_block_pattern');
+			
+			if($is_core_block_pattern){
+				$this_blockpattern_category = 'thirty8';
+			} else {
+				$this_blockpattern_category = get_bloginfo('name');
+			}
+
 		
 			register_block_pattern(
 				$blockpattern_slug,
@@ -152,7 +162,7 @@ function create_block_patterns(){
                 	'title'         => __( $blockpattern_title, 'textdomain' ),
                 	'description'   => _x( $blockpattern_description, 'Block pattern description', 'textdomain' ),
                 	'content'       => $blockpattern_contents,
-                	'categories'    => array(get_bloginfo('name')),
+                	'categories'    => array($this_blockpattern_category),
 					'keywords'		=> $block_pattern_keywords,
                 	'viewportWidth' => 800,
 				)
@@ -170,6 +180,10 @@ add_action( 'init', 'create_block_patterns' );
 
 // Set the block pattern category to be the site name - used above when registering block patterns
 function wpdocs_block_pattern_category() {
+	
+	register_block_pattern_category( 'thirty8', array(
+		'label' => __( 'Thirty8 Digital', 'text-domain' )
+	) );	
 		
 	register_block_pattern_category( get_bloginfo('name'), array(
 		'label' => __( get_bloginfo('name'), 'text-domain' )

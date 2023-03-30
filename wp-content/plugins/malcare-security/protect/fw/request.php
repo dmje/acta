@@ -37,6 +37,7 @@ class BVWPRequest {
 	const RULE_BLOCKED     = 60;
 	const RULE_ALLOWED     = 70;
 	const PRIVATEIP        = 80;
+	const GLOBAL_BOT_BLOCKED = 90;
 
 	public function __construct($ip) {
 		$fileNames = array();
@@ -109,6 +110,19 @@ class BVWPRequest {
 
 	public function setCategory($category) {
 		$this->category = $category;
+	}
+
+	public static function blacklistedCategories() {
+		return array(
+			BVWPRequest::BOT_BLOCKED,
+			BVWPRequest::COUNTRY_BLOCKED,
+			BVWPRequest::USER_BLACKLISTED,
+			BVWPRequest::GLOBAL_BOT_BLOCKED
+		);
+	}
+
+	public static function whitelistedCategories() {
+		return array(BVWPRequest::WHITELISTED);
 	}
 
 	public function setPostParams($postParams) {

@@ -26,6 +26,10 @@ class BVProtectBase {
 		return $ip;
 	}
 
+	public static function isIPv6($ip) {
+		return (false === filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) ? false : true;
+	}
+
 	public static function hasIPv6Support() {
 		return defined('AF_INET6');
 	}
