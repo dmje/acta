@@ -5,7 +5,7 @@ Tags: generatepress
 Requires at least: 5.2
 Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 2.3.0
+Stable tag: 2.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,10 @@ To learn how to install GP Premium, check out our documentation [here](https://d
 In most cases, #1 will work fine and is way easier.
 
 == Changelog ==
+
+= 2.3.1 =
+* Fix: SelectSearch component infinite loop
+* Fix: Block widths inside Block Elements
 
 = 2.3.0 =
 * Feature: Add Search Modal Element type
