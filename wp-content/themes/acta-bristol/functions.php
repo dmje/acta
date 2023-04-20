@@ -1,5 +1,7 @@
 <?php
 
+include('includes/functions-whatson.php');
+
 
 // Add style.css, checking for cache
 function thirty8_enqueue_mainstylesheet(){
