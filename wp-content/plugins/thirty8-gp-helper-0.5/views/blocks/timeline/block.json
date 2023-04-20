@@ -1,0 +1,14 @@
+{
+	"name": "acf/timeline",
+	"title": "Timeline",
+	"description": "Insert a visual timeline into your page",
+	"style": [ "" ],
+	"category": "thirty8",
+	"icon": "admin-comments",
+	"keywords": ["time", "dates", "timeline"],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "block.php"
+	},
+	"align": "full"
+}

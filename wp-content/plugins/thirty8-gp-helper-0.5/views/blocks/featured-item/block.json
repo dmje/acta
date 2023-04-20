@@ -1,0 +1,14 @@
+{
+	"name": "acf/featured-item",
+	"title": "Featured Item",
+	"description": "Insert a simple, readable block to feature other pages on your site",
+	"style": [ "" ],
+	"category": "thirty8",
+	"icon": "admin-comments",
+	"keywords": ["feature", "item"],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "block.php"
+	},
+	"align": "full"
+}

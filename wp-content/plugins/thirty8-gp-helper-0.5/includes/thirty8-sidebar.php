@@ -78,7 +78,7 @@
 			wp_reset_postdata();			
 		} else {
 			if(is_user_logged_in()){
-				echo '<p>You have not specified a sidebar for object records!</p>';
+				echo '<p>You have not specified a sidebar for events!</p>';
 				echo '<p>You can do this in the <a href="' . THIRTY8_GPHELPER_SITESETTINGSURL . '">site settings</a>.</p>';
 				
 			}

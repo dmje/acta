@@ -1,0 +1,14 @@
+{
+	"name": "acf/sugar-calendar",
+	"title": "Sugar Calendar",
+	"description": "Include a SugarCalendar event list or calendar into your page",
+	"style": [ "" ],
+	"category": "thirty8",
+	"icon": "calendar",
+	"keywords": ["calendar", "event", "events", "sugarcalendar"],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "block.php"
+	},
+	"align": "full"
+}

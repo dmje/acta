@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Plugin Name: Thirty8 GeneratePress Helper
  * Plugin URI: http://thirty8.co.uk
  * Description: Number of helper functions for working with GP child theme
- * Version: 0.6.1
+ * Version: 0.8
  * Author: Mike Ellis / Thirty8 Digital
  */
 
@@ -138,6 +138,9 @@ function thirty8_update_gp_field_group($group) {
 		//------------------- Blocks --------------------------//
 		'group_63e904296f264', 	  		// Test block
 		'group_63e90b6fdaf05',			// Carousel
+		'group_64312251bc2a4',			// Featured Item
+		'group_6436b148d29f4',			// Sugar Calendar
+		'group_643eb2302cb42',			// Timeline
   );
 
   if (in_array($group['key'], $groups)) {

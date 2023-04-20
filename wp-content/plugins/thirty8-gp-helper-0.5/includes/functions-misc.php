@@ -27,6 +27,11 @@ function thirty8_gp_external_scripts() {
 	// Swiper
 		wp_register_script('swiper', 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js', '', true);
 		wp_enqueue_script('swiper');	
+		
+	// Knightlab Timeline js
+		wp_register_script('knightlab', 'https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js', '', true);
+		wp_enqueue_script('knightlab');
+		
 
 	// UIKIT
 		/*
@@ -46,6 +51,10 @@ function thirty8_gp_external_styles(){
 	
 	// Swiper
 		wp_enqueue_style('swiper', 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css');		
+
+	// Knightlab timeline css
+		wp_enqueue_style('knightlab', 'https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css');
+
 
 	// UIKIT
 		/*
@@ -198,6 +207,40 @@ add_filter( 'render_block', function( $content, $block ) {
 
 	return $content;
 }, 10, 2 );
+
+
+// Dump customiser CSS to file
+
+function save_customiser_css(){
+	
+	$custom_query_args=array(
+	'post_type'=>'custom_css',
+	'posts_per_page' => -1,
+	'order' => 'ASC',
+);							
+
+$custom_query = new WP_Query( $custom_query_args );
+
+if ($custom_query->have_posts()) : 
+	
+	while ( $custom_query->have_posts() ) : $custom_query->the_post();
+		
+		$custom_css = get_the_content();
+		
+	endwhile;
+
+	// Dump to file in child theme					
+	$myfile = fopen(get_stylesheet_directory() . "/customiser.css", "w") or die("Unable to open file!");
+	fwrite($myfile, $custom_css);
+	fclose($myfile);						
+
+endif;		
+	
+}
+add_action( 'customize_save_after', 'save_customiser_css' );
+
+
+
 
 
 

@@ -18,6 +18,9 @@ include('functions-blocks.php');
 // Tests
 //include('functions-tests.php');
 
+// Sugar Calendar
+include('functions-sugarcalendar.php');
+
 // Make your plugin options pages here
 
 if( function_exists('acf_add_options_page') ) {

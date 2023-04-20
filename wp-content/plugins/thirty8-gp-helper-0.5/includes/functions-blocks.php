@@ -4,8 +4,11 @@
 
 add_action( 'init', 'register_acf_blocks' );
 function register_acf_blocks() {
-	register_block_type( THIRTY8_GPHELPER_PATH . '/views/blocks/test' );	
+	//register_block_type( THIRTY8_GPHELPER_PATH . '/views/blocks/test' );	
 	register_block_type( THIRTY8_GPHELPER_PATH . '/views/blocks/carousel' );	
+	register_block_type( THIRTY8_GPHELPER_PATH . '/views/blocks/featured-item' );	
+	register_block_type( THIRTY8_GPHELPER_PATH . '/views/blocks/sugar-calendar' );
+	register_block_type( THIRTY8_GPHELPER_PATH . '/views/blocks/timeline' );	
 }
 
 

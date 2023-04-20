@@ -1,0 +1,135 @@
+{
+    "key": "group_6436b148d29f4",
+    "title": "Event Calendar",
+    "fields": [
+        {
+            "key": "field_64401fadd0190",
+            "label": "Display Type",
+            "name": "display_type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Choose how to display your events. Note that \"list\" will not display recurring events, use a calendar for that instead.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "calendar": "Calendar",
+                "list": "List"
+            },
+            "default_value": "calendar",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_64401fcdd0191",
+            "label": "Show Date",
+            "name": "show_date",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_64401fadd0190",
+                        "operator": "==",
+                        "value": "list"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Check to display date alongside event",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_644020183ab28",
+            "label": "Show Time",
+            "name": "show_time",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_64401fadd0190",
+                        "operator": "==",
+                        "value": "list"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Check to display time alongside event",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_644020683ab2b",
+            "label": "Category",
+            "name": "selected_category",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Include a category slug, for example dance-club to only include that category in the list of events. Leave blank to display all categories.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_64401fadd0190",
+                        "operator": "==",
+                        "value": "list"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/sugar-calendar"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1681924780
+}
