@@ -1,0 +1,194 @@
+/* Mike */
+
+/* Content status tab */
+
+.content_statusbar {
+display:none;
+}
+
+.current_page_item{
+	font-weight: bold;
+}
+
+
+@font-face {
+    font-family: "Gotham";
+    src: url('https://acta-bristol.local/wp-content/uploads/2023/01/Gotham-Book.woff2') format('woff2'), url('https://acta-bristol.local/wp-content/uploads/2023/01/Gotham-Book.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+} 
+
+@font-face {
+    font-family: "Gotham";
+    src: url('https://acta-bristol.local/wp-content/uploads/2023/01/Gotham-Bold.woff2') format('woff2'), url('https://acta-bristol.local/wp-content/uploads/2023/01/Gotham-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@media screen and (min-width: 768px) {
+	.site-logo {
+			display: inline-block;
+			max-width: 100%;
+			top: 50%;
+			position: absolute;
+			transform: translateY(-50%);
+	}
+}
+
+.secondary-navigation {
+	margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.secondary-navigation .menu-toggle {
+	display: none;
+}
+
+.secondary-navigation li a {
+    padding: 2px 15px;
+    margin: 0 0 0 15px;
+    transition: .25s all ease-in-out;
+    background-color: var(--contrast-2) !important;
+    color: #fff !important;
+    border-style: solid;
+        border-width: 0 1px 3px;
+    border-color: #083337;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+}
+
+.secondary-navigation li a:hover, .secondary-navigation li a:focus {
+	background: #fff;
+	opacity: 0.66;
+}
+
+.secondary-navigation li:last-child {
+	border-right: 0;
+}
+
+.donate a {
+	position: relative;
+	z-index: 1;
+}
+
+.donate a:before {
+		content: '';
+    width: 17px;
+    height: 17px;
+    position: relative;
+    top: 4px;
+    left: -3px;
+		margin-right: 2px;
+    display: inline-block;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'%3E%3Ctitle%3EHeart%3C/title%3E%3Cpath d='M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'/%3E%3C/svg%3E") no-repeat center center;
+    background-size: contain;
+}
+
+.tickets a:before {
+		content: '';
+    width: 17px;
+    height: 17px;
+    position: relative;
+    top: 4px;
+    left: -4px;
+		margin-right: 2px;
+    display: inline-block;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'%3E%3Ctitle%3ETicket%3C/title%3E%3Cpath fill='none' stroke='%23fff' stroke-miterlimit='10' stroke-width='32' d='M366.05 146a46.7 46.7 0 01-2.42-63.42 3.87 3.87 0 00-.22-5.26l-44.13-44.18a3.89 3.89 0 00-5.5 0l-70.34 70.34a23.62 23.62 0 00-5.71 9.24h0a23.66 23.66 0 01-14.95 15h0a23.7 23.7 0 00-9.25 5.71L33.14 313.78a3.89 3.89 0 000 5.5l44.13 44.13a3.87 3.87 0 005.26.22 46.69 46.69 0 0165.84 65.84 3.87 3.87 0 00.22 5.26l44.13 44.13a3.89 3.89 0 005.5 0l180.4-180.39a23.7 23.7 0 005.71-9.25h0a23.66 23.66 0 0114.95-15h0a23.62 23.62 0 009.24-5.71l70.34-70.34a3.89 3.89 0 000-5.5l-44.13-44.13a3.87 3.87 0 00-5.26-.22 46.7 46.7 0 01-63.42-2.32z'/%3E%3Cpath fill='none' stroke='%23fff' stroke-miterlimit='10' stroke-width='32' stroke-linecap='round' d='M250.5 140.44l-16.51-16.51M294.52 184.46l-11.01-11M338.54 228.49l-11-11.01M388.07 278.01l-16.51-16.51'/%3E%3C/svg%3E") no-repeat center center;
+    background-size: contain;
+}
+
+
+.pattern {
+	position: relative;
+	z-index: 1;
+}
+
+.pattern--curve:after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		opacity: 0.3;
+		background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #f6f6f6 10px ), repeating-linear-gradient( #d2d2d255, #d2d2d2 );
+}
+
+.pattern--cross:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;		
+		z-index: -1;
+	opacity: 0.5;
+		background: radial-gradient(circle, transparent 20%, #1695a0 20%, #1695a0 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #1695a0 20%, #1695a0 80%, transparent 80%, transparent) 25px 25px, linear-gradient(#0f717a 2px, transparent 2px) 0 -1px, linear-gradient(90deg, #0f717a 2px, #1695a0 2px) -1px 0;
+background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
+}
+
+.pattern--grid:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;		
+		z-index: -1;
+	opacity: 0.5;
+	background-image:  linear-gradient(#0f717a 1px, transparent 1px), linear-gradient(to right, #0f717a 1px, #1695a0 1px);
+	background-size: 20px 20px;
+}
+
+.image-flourish figure {
+	position: relative;
+	z-index: 1;
+}
+
+.image-flourish figure:after {
+		content: '';
+		position: absolute;
+		bottom: -15px;
+		left: 15px;
+		width: 100%;
+		height: 100%;
+		background: var(--contrast);
+	z-index: -1;	
+}
+
+@media screen and (max-width: 768px) {
+	.image-flourish figure {
+		margin-right: 10px;
+	}
+	
+	.image-flourish figure:after {
+		bottom: -10px;
+		left: 10px
+	}
+}
+
+.fbc-page .fbc-wrap .fbc-items {
+	background-color: transparent;
+	font-family: Gotham;
+}
+
+.fbc-page .fbc-wrap .fbc-items li {
+	padding: 0 2px;
+}
+
+.fbc-page .fbc-wrap .fbc-items li:first-child {
+	padding-left: 0;
+}
+
+.fbc-page .fbc-wrap .fbc-items li:last-child {
+	padding-right: 0;
+}
+
+@media screen and (min-width: 768px) {
+	.home-hero-image {
+		max-height: 600px;
+		height: 75vh !important;
+	}
+}
