@@ -95,10 +95,10 @@ function srtcd_tlbo_single_event_handler($attr) {
 					template += '</div>';
 					template += '<div class="book-tkt">';
 						<?php if($attr['btn_event_details_visible'] === 'true') { ?>
-						template += '<a class="bk-tkt" href="https://thelittleboxoffice.com/thespirekingston/event/view/<!--id-->" target="_blank" class="more-info"><strong><?php echo $attr['btn_event_details_text']; ?></strong></a>';
+						template += '<a class="bk-tkt" href="https://thelittleboxoffice.com/acta/event/view/<!--id-->" target="_blank" class="more-info"><strong><?php echo $attr['btn_event_details_text']; ?></strong></a>';
 						<?php } ?>
 						<?php if($attr['btn_book_visible'] === 'true') { ?>
-						template += '<a class="bk-tkt" href="https://thelittleboxoffice.com/thespirekingston/book/event/<!--id-->" target="_blank" class="book-tickets"><strong><?php echo $attr['btn_book_text']; ?></strong></a>';
+						template += '<a class="bk-tkt" href="https://thelittleboxoffice.com/acta/book/event/<!--id-->" target="_blank" class="book-tickets"><strong><?php echo $attr['btn_book_text']; ?></strong></a>';
 						<?php } ?>
 					template += '</div>';
 				template += '</div>';
