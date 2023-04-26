@@ -72,8 +72,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php
 			
 			echo acta_whatson_times(get_the_ID());
-			
+									
 			the_content();
+			
+			echo acta_booking_link(get_the_ID());
 
 			wp_link_pages(
 				array(
