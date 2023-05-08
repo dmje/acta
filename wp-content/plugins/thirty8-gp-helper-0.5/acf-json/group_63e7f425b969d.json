@@ -91,6 +91,131 @@
             "ui": 1
         },
         {
+            "key": "field_6458cddb65ba1",
+            "label": "Use CleverSnags",
+            "name": "use_cleversnags",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Check box to enable CleverSnags \/ Trello bug tracking on the site. Make sure you've set the site up on CleverSnags first!",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_6458cf8517937",
+            "label": "CleverSnags ID",
+            "name": "cleversnags_id",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "ID for this site",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6458cddb65ba1",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6458cf5917936",
+            "label": "CleverSnags Trello URL",
+            "name": "cleversnags_trello_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Trello board URL for this site",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6458cddb65ba1",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_6458d188dc427",
+            "label": "CleverSnags Text Colour",
+            "name": "cleversnags_text_colour",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "Text colour for the CleverSnags box",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6458cddb65ba1",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#ffffff",
+            "enable_opacity": 0,
+            "return_format": "string"
+        },
+        {
+            "key": "field_6458d15ddc426",
+            "label": "CleverSnags Background Colour",
+            "name": "cleversnags_background_colour",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "Background colour of the CleverSnags box",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6458cddb65ba1",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#000000",
+            "enable_opacity": 0,
+            "return_format": "string"
+        },
+        {
             "key": "field_63e7f4535c597",
             "label": "Social Settings",
             "name": "",
@@ -315,7 +440,107 @@
             },
             "choices": {
                 "acf\/test": "Test block",
-                "acf\/carousel": "Carousel"
+                "acf\/carousel": "Carousel [acf\/carousel]",
+                "core\/legacy-widget": "Legacy Widget [core\/legacy-widget]",
+                "core\/archives": "Archives [core\/archives]",
+                "core\/avatar": "Avatar [core\/avatar]",
+                "core\/block": "Reusable block [core\/block]",
+                "core\/calendar": "Calendar [core\/calendar]",
+                "core\/categories": "Categories List [core\/categories]",
+                "core\/comment-author-name": "Comment Author Name [core\/comment-author-name]",
+                "core\/comment-content": "Comment Content [core\/comment-content]",
+                "core\/comment-date": "Comment Date [core\/comment-date]",
+                "core\/comment-edit-link": "Comment Edit Link [core\/comment-edit-link]",
+                "core\/comment-reply-link": "Comment Reply Link [core\/comment-reply-link]",
+                "core\/comment-template": "Comment Template [core\/comment-template]",
+                "core\/comments": "Comments [core\/comments]",
+                "core\/comments-pagination": "Comments Pagination [core\/comments-pagination]",
+                "core\/comments-pagination-next": "Comments Next Page [core\/comments-pagination-next]",
+                "core\/comments-pagination-numbers": "Comments Page Numbers [core\/comments-pagination-numbers]",
+                "core\/comments-pagination-previous": "Comments Previous Page [core\/comments-pagination-previous]",
+                "core\/comments-title": "Comments Title [core\/comments-title]",
+                "core\/cover": "Cover [core\/cover]",
+                "core\/file": "File [core\/file]",
+                "core\/gallery": "Gallery [core\/gallery]",
+                "core\/heading": "Heading [core\/heading]",
+                "core\/home-link": "Home Link [core\/home-link]",
+                "core\/image": "Image [core\/image]",
+                "core\/latest-comments": "Latest Comments [core\/latest-comments]",
+                "core\/latest-posts": "Latest Posts [core\/latest-posts]",
+                "core\/loginout": "Login\/out [core\/loginout]",
+                "core\/navigation": "Navigation [core\/navigation]",
+                "core\/navigation-link": "Custom Link [core\/navigation-link]",
+                "core\/navigation-submenu": "Submenu [core\/navigation-submenu]",
+                "core\/page-list": "Page List [core\/page-list]",
+                "core\/pattern": "Pattern [core\/pattern]",
+                "core\/post-author": "Post Author [core\/post-author]",
+                "core\/post-author-biography": "Post Author Biography [core\/post-author-biography]",
+                "core\/post-author-name": "Post Author Name [core\/post-author-name]",
+                "core\/post-comments-form": "Post Comments Form [core\/post-comments-form]",
+                "core\/post-content": "Post Content [core\/post-content]",
+                "core\/post-date": "Post Date [core\/post-date]",
+                "core\/post-excerpt": "Post Excerpt [core\/post-excerpt]",
+                "core\/post-featured-image": "Post Featured Image [core\/post-featured-image]",
+                "core\/post-navigation-link": "Post Navigation Link [core\/post-navigation-link]",
+                "core\/post-template": "Post Template [core\/post-template]",
+                "core\/post-terms": "Post Terms [core\/post-terms]",
+                "core\/post-title": "Post Title [core\/post-title]",
+                "core\/query": "Query Loop [core\/query]",
+                "core\/query-no-results": "No results [core\/query-no-results]",
+                "core\/query-pagination": "Pagination [core\/query-pagination]",
+                "core\/query-pagination-next": "Next Page [core\/query-pagination-next]",
+                "core\/query-pagination-numbers": "Page Numbers [core\/query-pagination-numbers]",
+                "core\/query-pagination-previous": "Previous Page [core\/query-pagination-previous]",
+                "core\/query-title": "Query Title [core\/query-title]",
+                "core\/read-more": "Read More [core\/read-more]",
+                "core\/rss": "RSS [core\/rss]",
+                "core\/search": "Search [core\/search]",
+                "core\/shortcode": "Shortcode [core\/shortcode]",
+                "core\/site-logo": "Site Logo [core\/site-logo]",
+                "core\/site-tagline": "Site Tagline [core\/site-tagline]",
+                "core\/site-title": "Site Title [core\/site-title]",
+                "core\/social-link": "Social Icon [core\/social-link]",
+                "core\/tag-cloud": "Tag Cloud [core\/tag-cloud]",
+                "core\/template-part": "Template Part [core\/template-part]",
+                "core\/term-description": "Term Description [core\/term-description]",
+                "core\/audio": "Audio [core\/audio]",
+                "core\/button": "Button [core\/button]",
+                "core\/buttons": "Buttons [core\/buttons]",
+                "core\/code": "Code [core\/code]",
+                "core\/column": "Column [core\/column]",
+                "core\/columns": "Columns [core\/columns]",
+                "core\/embed": "Embed [core\/embed]",
+                "core\/freeform": "Classic [core\/freeform]",
+                "core\/group": "Group [core\/group]",
+                "core\/html": "Custom HTML [core\/html]",
+                "core\/list": "List [core\/list]",
+                "core\/list-item": "List item [core\/list-item]",
+                "core\/media-text": "Media & Text [core\/media-text]",
+                "core\/missing": "Unsupported [core\/missing]",
+                "core\/more": "More [core\/more]",
+                "core\/nextpage": "Page Break [core\/nextpage]",
+                "core\/page-list-item": "Page List Item [core\/page-list-item]",
+                "core\/paragraph": "Paragraph [core\/paragraph]",
+                "core\/preformatted": "Preformatted [core\/preformatted]",
+                "core\/pullquote": "Pullquote [core\/pullquote]",
+                "core\/quote": "Quote [core\/quote]",
+                "core\/separator": "Separator [core\/separator]",
+                "core\/social-links": "Social Icons [core\/social-links]",
+                "core\/spacer": "Spacer [core\/spacer]",
+                "core\/table": "Table [core\/table]",
+                "core\/text-columns": "Text Columns (deprecated) [core\/text-columns]",
+                "core\/verse": "Verse [core\/verse]",
+                "core\/video": "Video [core\/video]",
+                "generateblocks\/container": "Container [generateblocks\/container]",
+                "generateblocks\/grid": "Grid [generateblocks\/grid]",
+                "generateblocks\/query-loop": "Query loop [generateblocks\/query-loop]",
+                "generateblocks\/button-container": "Buttons [generateblocks\/button-container]",
+                "generateblocks\/headline": "Headline [generateblocks\/headline]",
+                "generateblocks\/button": "Button [generateblocks\/button]",
+                "generateblocks\/image": "Image [generateblocks\/image]",
+                "acf\/featured-item": "Featured Item [acf\/featured-item]",
+                "acf\/sugar-calendar": "Sugar Calendar [acf\/sugar-calendar]",
+                "acf\/timeline": "Timeline [acf\/timeline]"
             },
             "default_value": [],
             "return_format": "array",
@@ -323,7 +548,8 @@
             "layout": "vertical",
             "toggle": 1,
             "save_custom": 0,
-            "enabled_blocks": []
+            "enabled_blocks": [],
+            "custom_choice_button_text": "Add new choice"
         },
         {
             "key": "field_63f4d2abf470e",
@@ -381,5 +607,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1676989247
+    "modified": 1683542446
 }

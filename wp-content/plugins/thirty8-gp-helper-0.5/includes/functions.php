@@ -1,38 +1,37 @@
 <?php
 
 // Misc
-include('functions-misc.php');
+include 'functions-misc.php';
 
 // Widgets
-include('functions-widgets.php');
+include 'functions-widgets.php';
 
 // CPTs
-include('functions-cpts.php');
+include 'functions-cpts.php';
 
 // Shortcodes
-include('functions-shortcodes.php');
+include 'functions-shortcodes.php';
 
 // Blocks
-include('functions-blocks.php');
+include 'functions-blocks.php';
 
 // Tests
 //include('functions-tests.php');
 
 // Sugar Calendar
-include('functions-sugarcalendar.php');
+include 'functions-sugarcalendar.php';
 
 // Make your plugin options pages here
 
-if( function_exists('acf_add_options_page') ) {
-	
-	acf_add_options_page(array(
-		'page_title' 	=> 'Site Settings',
-		'menu_title'	=> 'Site Settings',
-		'menu_slug' 	=> 'site-settings',
-		'capability'	=> 'edit_posts',
-		'redirect'		=> false
-	));
-	
+if (function_exists('acf_add_options_page')) {
+	acf_add_options_page([
+		'page_title' => 'Site Settings',
+		'menu_title' => 'Site Settings',
+		'menu_slug' => 'site-settings',
+		'capability' => 'edit_posts',
+		'redirect' => false,
+	]);
+
 	/*
 	acf_add_options_sub_page(array(
 		'page_title' 	=> 'Plugin Other Settings',
@@ -41,8 +40,7 @@ if( function_exists('acf_add_options_page') ) {
 	));
 	
 	*/
-	
+
 	// Add more sub pages as needed
-	
 }
 ?>

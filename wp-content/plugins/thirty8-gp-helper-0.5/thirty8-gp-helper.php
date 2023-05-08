@@ -1,13 +1,15 @@
 <?php
 
 // prevent direct access
-if ( ! defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) {
+	exit();
+}
 
 /**
  * Plugin Name: Thirty8 GeneratePress Helper
  * Plugin URI: http://thirty8.co.uk
  * Description: Number of helper functions for working with GP child theme
- * Version: 0.8
+ * Version: 0.81
  * Author: Mike Ellis / Thirty8 Digital
  */
 
@@ -21,79 +23,80 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 );
 
 // Include ACF
-if (!class_exists('ACF')) {		
+if (!class_exists('ACF')) {
 	// ACF not installed already
-	//echo '<p>ACF PRO is required for the thirty8 gp helper plugin to work!</p>';	
+	//echo '<p>ACF PRO is required for the thirty8 gp helper plugin to work!</p>';
 }
 
 // Paths
-define( 'THIRTY8_GPHELPER_PATH', plugin_dir_path( __FILE__ ) );
-define( 'THIRTY8_GPHELPER_URL', plugin_dir_url( __FILE__ ) );
-define( 'THIRTY8_GPHELPER_SITESETTINGSURL', get_admin_url() . 'admin.php?page=site-settings');
-
+define('THIRTY8_GPHELPER_PATH', plugin_dir_path(__FILE__));
+define('THIRTY8_GPHELPER_URL', plugin_dir_url(__FILE__));
+define(
+	'THIRTY8_GPHELPER_SITESETTINGSURL',
+	get_admin_url() . 'admin.php?page=site-settings'
+);
 
 // from https://support.advancedcustomfields.com/forums/topic/error-when-creating-new-post/
 // this is used to include acf form head on the plugin settings page
-add_action( 'init', 'thirty8_gp_helper_acf_form_head' );
-function thirty8_gp_helper_acf_form_head(){
+add_action('init', 'thirty8_gp_helper_acf_form_head');
+function thirty8_gp_helper_acf_form_head()
+{
 	// only load on admin
-	if(is_admin()){
-		acf_form_head();	
+	if (is_admin()) {
+		acf_form_head();
 	}
-	
 }
 
 // Include ACF fields - add more as needed
 
-include_once('data/acf_plugin_general_settings.php');
+include_once 'data/acf_plugin_general_settings.php';
 
 // Include functions
-include_once('includes/functions.php');
+include_once 'includes/functions.php';
 
 //add_filter('acf/settings/show_admin', '__return_false');
 
 class Thirty8GPHelper
 {
-
-	public function __construct() 
+	public function __construct()
 	{
 		// Build the settings pages
-		add_action( 'admin_menu', array( $this, 'create_thirty8_gp_helper_settings_pages' ) );
-						
+		add_action('admin_menu', [
+			$this,
+			'create_thirty8_gp_helper_settings_pages',
+		]);
 	}
-		
-	
+
 	//---------------------------------------
 	//----- Stuff for plugin menu items -----
-		
-		public function create_thirty8_gp_helper_settings_pages() 
+
+	public function create_thirty8_gp_helper_settings_pages()
+	{
+		// Add the menu item and page
+		$page_title = 'ThePageTitle'; // shown in page title field only
+		$menu_title = 'TheMenuTitle'; // visible in menu
+		$capability = 'manage_options';
+		$slug = 'thirty8-gp-helper';
+		$callback = [$this, 'thirty8_gp_helper_homepage'];
+		$icon = 'dashicons-admin-plugins';
+		$position = 100;
+
+		// Main menu
+		//add_menu_page( $page_title, $menu_title, $capability, $slug, $callback, $icon, $position );
+
+		// Sub menus - add more as needed
+		//add_submenu_page('thirty8-gp-helper', 'settings', 'Settings', 'manage_options', 'thirty8-gp-helper_settings_page','thirty8_gp_helper_settings_page');
+
+		//add_submenu_page('theslug', 'thepagetitle', 'submenutitle', 'manage_options', 'subpage_name','subpage_name1');
+		//add_submenu_page('theslug', 'thepagetitle2', 'submenutitle2', 'manage_options', 'subpage_name2','subpage_name2');
+
+		// Functions to include sub pages - add more as needed
+		function thirty8_gp_helper_settings_page()
 		{
-	
-			// Add the menu item and page
-			$page_title = 'ThePageTitle';	// shown in page title field only 
-			$menu_title = 'TheMenuTitle'; 	// visible in menu
-			$capability = 'manage_options';
-			$slug = 'thirty8-gp-helper';
-			$callback = array( $this, 'thirty8_gp_helper_homepage' );
-			$icon = 'dashicons-admin-plugins';
-			$position = 100;
-		
-			// Main menu	
-			//add_menu_page( $page_title, $menu_title, $capability, $slug, $callback, $icon, $position );
-			
-			// Sub menus - add more as needed
-			//add_submenu_page('thirty8-gp-helper', 'settings', 'Settings', 'manage_options', 'thirty8-gp-helper_settings_page','thirty8_gp_helper_settings_page');
-			
-			//add_submenu_page('theslug', 'thepagetitle', 'submenutitle', 'manage_options', 'subpage_name','subpage_name1');		
-			//add_submenu_page('theslug', 'thepagetitle2', 'submenutitle2', 'manage_options', 'subpage_name2','subpage_name2');
-	
-			// Functions to include sub pages - add more as needed
-			function thirty8_gp_helper_settings_page()
-			{
-				include('admin/settings.php');
-			}
-			
-			/*
+			include 'admin/settings.php';
+		}
+
+		/*
 			// Additional Pages here
 			
 				function subpage_name1()
@@ -106,58 +109,48 @@ class Thirty8GPHelper
 					include('admin/page2.php');
 				}
 			*/
-		
-	
-		}	
-		
-		public function thirty8_gp_helper_homepage()
-		{		
-			include('admin/index.php');
-		}		
-	
+	}
+
+	public function thirty8_gp_helper_homepage()
+	{
+		include 'admin/index.php';
+	}
+
 	//-------- End menu items ------------
-	
-		
-	
 }
 
 new Thirty8GPHelper();
 
-
-
-
 // Save
-function thirty8_update_gp_field_group($group) {
-  // list of field groups that should be saved to my-plugin/acf-json
-  $groups = array(
+function thirty8_update_gp_field_group($group)
+{
+	// list of field groups that should be saved to my-plugin/acf-json
+	$groups = [
 		//------------------- Global stuff --------------------------//
-		'group_63e7f425b969d',			// Site Settings - ACF options page
-		'group_5e84c728864ab',			// Content Intro
-		'group_5e220bbeecb8e',			// Sidebar Selection
-		'group_54d9016a273fd',			// Sidebar Builder
+		'group_63e7f425b969d', // Site Settings - ACF options page
+		'group_5e84c728864ab', // Content Intro
+		'group_5e220bbeecb8e', // Sidebar Selection
+		'group_54d9016a273fd', // Sidebar Builder
 		//------------------- Blocks --------------------------//
-		'group_63e904296f264', 	  		// Test block
-		'group_63e90b6fdaf05',			// Carousel
-		'group_64312251bc2a4',			// Featured Item
-		'group_6436b148d29f4',			// Sugar Calendar
-		'group_643eb2302cb42',			// Timeline
-  );
+		'group_63e904296f264', // Test block
+		'group_63e90b6fdaf05', // Carousel
+		'group_64312251bc2a4', // Featured Item
+		'group_6436b148d29f4', // Sugar Calendar
+		'group_643eb2302cb42', // Timeline
+	];
 
-  if (in_array($group['key'], $groups)) {
-	add_filter('acf/settings/save_json', function() {
-	  return plugin_dir_path( __FILE__ ) . '/acf-json';
-	});
-  }
+	if (in_array($group['key'], $groups)) {
+		add_filter('acf/settings/save_json', function () {
+			return plugin_dir_path(__FILE__) . '/acf-json';
+		});
+	}
 }
 add_action('acf/update_field_group', 'thirty8_update_gp_field_group', 1, 1);
 
 // Load - includes the /acf-json folder in this plugin to the places to look for ACF Local JSON files
-add_filter('acf/settings/load_json', function($paths) {
-  $paths[] = plugin_dir_path( __FILE__ ) . '/acf-json';
-  return $paths;
+add_filter('acf/settings/load_json', function ($paths) {
+	$paths[] = plugin_dir_path(__FILE__) . '/acf-json';
+	return $paths;
 });
-
-
-
 
 ?>
