@@ -3,22 +3,43 @@
 <aside class="widget inner-padding widget_pages">
 	<script>
 		jQuery(document).ready(function($) {
-		// In this function every menu which has an active link opens if a link is active. Its ul parent opens itself and adds the class 'open' to its parent (the arrow) so it turns 90 degrees
-		$('.widget-menu li').each(function(i, el) {
-			if ($(el).hasClass('current_page_item')) {
-				$(el).parent().show().parent().addClass('open');
-			};
-		});
-
-		// This function ensures that a menu pops open when you click on it. All other menu's automatically close if the user clicks on a ul header. All the opened ul's close except the one clicked on
-		$('.widget-menu li.page_item_has_children').click(function(event) {
-			$('.widget-menu > ul > li > ul:visible').not($(this).nextAll('ul')).stop().hide(200).parent().removeClass('open'); //
-				$(this).nextAll('ul').slideToggle(200, function() {
-					$(this).parent('.pagenav').toggleClass('open');
-				});
+			// prevent page from jumping to top from  # href link
+			$('.widget-menu li.page_item_has_children > a').click(function(e) {
+				e.preventDefault();
 			});
+
+			// remove link from menu items that have children
+			$(".widget-menu li.page_item_has_children > a").attr("href", "#");
+
+			$('.current_page_item').closest("ul").parent().addClass('active');
+
+			//  function to open / close menu items
+			$(".widget-menu a").click(function() {
+				var link = $(this);
+				var closest_ul = link.closest("ul");
+				var parallel_active_links = closest_ul.find(".active")
+				var closest_li = link.closest("li");
+				var link_status = closest_li.hasClass("active");
+				var count = 0;
+
+				closest_ul.find("ul").slideUp(function() {
+					if (++count == closest_ul.find("ul").length)
+							parallel_active_links.removeClass("active");
+				});
+
+				if (!link_status) {
+					closest_li.children("ul").slideDown();
+					closest_li.addClass("active");
+				}
+			})
 		});
 	</script>
+
+	<style>
+		.widget-menu .page_item_has_children ul { display: none; }
+
+		.widget-menu .page_item_has_children.active > ul { display: block; }
+	</style>
 
 	<h2 class="widget-title">In this section</h2>
 		
