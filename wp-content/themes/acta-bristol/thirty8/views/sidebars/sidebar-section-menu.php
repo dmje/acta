@@ -11,8 +11,8 @@
 		});
 
 		// This function ensures that a menu pops open when you click on it. All other menu's automatically close if the user clicks on a ul header. All the opened ul's close except the one clicked on
-		$('.widget-menu" h4').click(function(event) {
-			$('.widget-menu" > ul > li > ul:visible').not($(this).nextAll('ul')).stop().hide(200).parent().removeClass('open'); //
+		$('.widget-menu li.page_item_has_children').click(function(event) {
+			$('.widget-menu > ul > li > ul:visible').not($(this).nextAll('ul')).stop().hide(200).parent().removeClass('open'); //
 				$(this).nextAll('ul').slideToggle(200, function() {
 					$(this).parent('.pagenav').toggleClass('open');
 				});
