@@ -8,6 +8,7 @@
 
 .current_page_item > a {
 	font-weight: bold;
+	color: var(--contrast);
 }
 
 @font-face {
