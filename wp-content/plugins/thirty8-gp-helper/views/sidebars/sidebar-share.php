@@ -1,6 +1,24 @@
+<?php
+
+// Check to see if there is an override in the child theme
+
+$child_theme_override =
+	get_stylesheet_directory() . '/thirty8/views/sidebars/' . basename(__FILE__);
+
+if (file_exists($child_theme_override)) {
+	include $child_theme_override; ?>
+
+<?php
+} else {
+	 ?>
+
 <aside class="widget inner-padding widget_share">
 	
-	<h2 class="widget-title"><?php if(get_sub_field('header_text')){ the_sub_field('header_text'); } else { echo 'Share This'; }?></h2>
+	<h2 class="widget-title"><?php if (get_sub_field('header_text')) {
+ 	the_sub_field('header_text');
+ } else {
+ 	echo 'Share This';
+ } ?></h2>
 	
 	<?php $site_url = site_url(); ?>
 	<?php $share_url = urlencode($site_url); ?>
@@ -34,3 +52,6 @@
 	</ul>
 
 </div>
+
+<?php
+} ?>
