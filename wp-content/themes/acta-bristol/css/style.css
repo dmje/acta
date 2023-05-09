@@ -240,11 +240,14 @@ p.featured-item-description {
     margin-bottom: 15px;
 }
 
+.featured-item-readmore {
+    margin-bottom: 15px;
+}
+
 .featured-item-readmore a {
 	color: var(--contrast-2);
 	text-decoration: underline;
 	font-size: 16px;
-    margin-bottom: 15px;
 }
 
 
