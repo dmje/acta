@@ -11,30 +11,34 @@
 			// remove link from menu items that have children
 			$(".widget-menu li.page_item_has_children > a").attr("href", "#");
 
+			$('.current_page_item').closest("ul").addClass('active');
+
 			//  function to open / close menu items
 			$(".widget-menu a").click(function() {
-					var link = $(this);
-					var closest_ul = link.closest("ul");
-					var parallel_active_links = closest_ul.find(".active")
-					var closest_li = link.closest("li");
-					var link_status = closest_li.hasClass("active");
-					var count = 0;
+				var link = $(this);
+				var closest_ul = link.closest("ul");
+				var parallel_active_links = closest_ul.find(".active")
+				var closest_li = link.closest("li");
+				var link_status = closest_li.hasClass("active");
+				var count = 0;
 
-					closest_ul.find("ul").slideUp(function() {
-							if (++count == closest_ul.find("ul").length)
-									parallel_active_links.removeClass("active");
-					});
+				closest_ul.find("ul").slideUp(function() {
+					if (++count == closest_ul.find("ul").length)
+							parallel_active_links.removeClass("active");
+				});
 
-					if (!link_status) {
-							closest_li.children("ul").slideDown();
-							closest_li.addClass("active");
-					}
+				if (!link_status) {
+					closest_li.children("ul").slideDown();
+					closest_li.addClass("active");
+				}
 			})
 		});
 	</script>
 
 	<style>
 		.widget-menu .page_item_has_children ul { display: none; }
+
+		.widget-menu .page_item_has_children ul.active { display: block; }
 	</style>
 
 	<h2 class="widget-title">In this section</h2>
