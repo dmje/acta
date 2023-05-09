@@ -33,6 +33,10 @@
 		});
 	</script>
 
+	<style>
+		.widget-menu .page_item_has_children ul { display: none; }
+	</style>
+
 	<h2 class="widget-title">In this section</h2>
 		
 	<ul class="widget-menu">
