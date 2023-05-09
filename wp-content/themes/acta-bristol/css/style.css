@@ -220,6 +220,21 @@
 	}
 }
 
+.featured-item-image a img {
+    aspect-ratio: 4/3;
+    object-fit: cover;
+	margin-bottom: 10px;
+}
+
+p.featured-item-description {
+    margin-bottom: 5px;
+}
+
+.featured-item-readmore a {
+	color: var(--contrast-2);
+}
+
+
 /* CleverSnags tweak */
 #admintab {
 	width: 270px !important;
