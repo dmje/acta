@@ -11,7 +11,7 @@
 			// remove link from menu items that have children
 			$(".widget-menu li.page_item_has_children > a").attr("href", "#");
 
-			$('.current_page_item').closest("ul").addClass('active');
+			$('.current_page_item').closest("ul").parent().addClass('active');
 
 			//  function to open / close menu items
 			$(".widget-menu a").click(function() {
