@@ -3,8 +3,6 @@
 <aside class="widget inner-padding widget_pages">
 
 	<h2 class="widget-title">In this section</h2>
-
-	This is just a tribute
 		
 	<ul class="widget-menu">
 		<?php $parent = get_sub_field('parent_item'); ?>
