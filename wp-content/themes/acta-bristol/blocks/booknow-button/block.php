@@ -13,4 +13,7 @@ Allow Multiple: true
 */
 ?>
 
-<h2>Put your block markup in here</h2>
+<?php
+$postid = get_the_ID();
+echo acta_booking_link($postid);
+?> 
