@@ -36,13 +36,17 @@ function my_acf_op_init()
 
 function analytics_head()
 {
-	echo get_field('gtm_head', 'options');
+	if (!is_user_logged_in()) {
+		echo get_field('gtm_head', 'options');
+	}
 }
 add_action('wp_head', 'analytics_head');
 
 function analytics_body()
 {
-	echo get_field('gtm_body', 'options');
+	if (!is_user_logged_in()) {
+		echo get_field('gtm_body', 'options');
+	}
 }
 add_action('wp_body_open', 'analytics_body');
 
