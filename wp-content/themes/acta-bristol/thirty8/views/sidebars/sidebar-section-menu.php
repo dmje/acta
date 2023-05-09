@@ -39,6 +39,26 @@
 		.widget-menu .page_item_has_children ul { display: none; }
 
 		.widget-menu .page_item_has_children.active > ul { display: block; }
+
+		.widget ul li.menu-item-has-children, .widget ul li.page_item_has_children {
+			padding-bottom: 5px !important;
+		}
+
+		.widget ul li.page_item_has_children > a:after {
+			content: "\f107";
+			font-family: GeneratePress;
+			display: inline-block;
+			width: 0.8em;
+			font-size: 18px;
+			text-align: left;
+			margin-left: 7px;
+			line-height: 19px;
+			vertical-align: middle;
+		}
+
+		.widget ul li.page_item_has_children.active > a:after {
+			transform: rotate(180deg);
+		}
 	</style>
 
 	<h2 class="widget-title">In this section</h2>
