@@ -17,7 +17,8 @@ if (file_exists($child_theme_override)) {
 	<h2 class="widget-title">In this section</h2>
 		
 	<ul class="widget-menu">
-		<?php $parent = get_sub_field('parent_item'); ?>
+		<?php // use wp_list_pages to display parent and all child pages all generations (a tree with parent)
+  $parent = get_sub_field('parent_item'); ?>
 		<li><a href="<?php the_permalink($parent); ?>"><?php echo get_the_title(
 	$parent
 ); ?></a></li>
@@ -35,5 +36,4 @@ if (file_exists($child_theme_override)) {
 </div>
 
 <?php
-}
-?>
+} ?>

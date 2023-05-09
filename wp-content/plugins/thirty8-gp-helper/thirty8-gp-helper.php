@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
  * Plugin Name: Thirty8 GeneratePress Helper
  * Plugin URI: http://thirty8.co.uk
  * Description: Number of helper functions for working with GP child theme
- * Version: 0.81
+ * Version: 0.83
  * Author: Mike Ellis / Thirty8 Digital
  */
 
