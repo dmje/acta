@@ -6,7 +6,7 @@
 	display: none;
 }
 
-.current_page_item {
+.current_page_item > a {
 	font-weight: bold;
 }
 
