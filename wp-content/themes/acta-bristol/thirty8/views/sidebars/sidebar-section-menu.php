@@ -4,7 +4,7 @@
 	<script>
 		jQuery(document).ready(function($) {
 		// In this function every menu which has an active link opens if a link is active. Its ul parent opens itself and adds the class 'open' to its parent (the arrow) so it turns 90 degrees
-		$('.widget-menu" li').each(function(i, el) {
+		$('.widget-menu li').each(function(i, el) {
 			if ($(el).hasClass('current_page_item')) {
 				$(el).parent().show().parent().addClass('open');
 			};
