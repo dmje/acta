@@ -13,7 +13,9 @@ Allow Multiple: true
 */
 ?>
 
+<div class="booknow-button-container">
 <?php
 $postid = get_the_ID();
 echo acta_booking_link($postid);
 ?> 
+</div>
