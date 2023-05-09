@@ -38,7 +38,7 @@
 	<style>
 		.widget-menu .page_item_has_children ul { display: none; }
 
-		.widget-menu .page_item_has_children ul.active { display: block; }
+		.widget-menu .page_item_has_children ul.active > ul { display: block; }
 	</style>
 
 	<h2 class="widget-title">In this section</h2>
