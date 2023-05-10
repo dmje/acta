@@ -48,7 +48,7 @@ if ($image_id) {
 	 
 	 <div class="acta-whatson-text">
 	 
-		<h2><?php the_title(); ?></h2>
+		<h3><?php the_title(); ?></h3>
 		
  		<?php echo acta_whatson_times(get_the_ID()); ?>
 		

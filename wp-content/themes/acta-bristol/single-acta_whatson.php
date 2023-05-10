@@ -5,51 +5,54 @@
  * @package GeneratePress
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+if (!defined('ABSPATH')) {
+	exit(); // Exit if accessed directly.
 }
 
-get_header(); ?>
+get_header();
+?>
 
-	<div <?php generate_do_attr( 'content' ); ?>>
-		<main <?php generate_do_attr( 'main' ); ?>>
+	<div <?php generate_do_attr('content'); ?>>
+		<main <?php generate_do_attr('main'); ?>>
 			<?php
-			/**
-			 * generate_before_main_content hook.
-			 *
-			 * @since 0.1
-			 */
-			do_action( 'generate_before_main_content' );
+   /**
+    * generate_before_main_content hook.
+    *
+    * @since 0.1
+    */
+   do_action('generate_before_main_content');
 
-			if ( generate_has_default_loop() ) {
-				while ( have_posts() ) :
+   if (generate_has_default_loop()) {
+   	while (have_posts()):
+   		echo 'ARGH';
 
-					the_post();
+   		the_post();
 
-					//generate_do_template_part( 'single' );					
-					get_template_part( 'partials/acta_whatson', 'single' );
+   		//generate_do_template_part( 'single' );
+   		get_template_part('partials/acta_whatson', 'single');
+   	endwhile;
+   }
 
-				endwhile;
-			}
-
-			/**
-			 * generate_after_main_content hook.
-			 *
-			 * @since 0.1
-			 */
-			do_action( 'generate_after_main_content' );
-			?>
+   /**
+    * generate_after_main_content hook.
+    *
+    * @since 0.1
+    */
+   do_action('generate_after_main_content');
+   ?>
 		</main>
 	</div>
 
 	<?php
-	/**
-	 * generate_after_primary_content_area hook.
-	 *
-	 * @since 2.0
-	 */
-	do_action( 'generate_after_primary_content_area' );
+ /**
+  * generate_after_primary_content_area hook.
+  *
+  * @since 2.0
+  */
+ do_action('generate_after_primary_content_area');
 
-	generate_construct_sidebars();
+ generate_construct_sidebars();
 
-	get_footer();
+ get_footer();
+ ?>
+

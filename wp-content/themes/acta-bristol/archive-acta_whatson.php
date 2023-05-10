@@ -40,19 +40,88 @@ get_header();
    		 */
    		do_action('generate_before_loop', 'archive');
 
-   		while (have_posts()):
-   			the_post();
+   		// The Loop
 
-   			//generate_do_template_part('archive');
+   		echo '<div class="whatson-container">';
 
-   			get_template_part('partials/acta_whatson', 'archive');
-   		endwhile;
+   		// Get present and future events ----------------------------
+   		$today = date('Ymd');
 
-   		/**
-   		 * generate_after_loop hook.
-   		 *
-   		 * @since 2.3
-   		 */
+   		echo '<div class="whatson-present">';
+
+   		echo '<h2>Current Productions</h2>';
+
+   		// Set up the query arguments
+   		$args = [
+   			'post_type' => 'acta_whatson',
+   			'meta_query' => [
+   				[
+   					'key' => 'end_date',
+   					'value' => $today,
+   					'compare' => '>=',
+   					'type' => 'DATE',
+   				],
+   			],
+   		];
+
+   		// Run the query
+   		$query = new WP_Query($args);
+
+   		// Check if there are any posts
+   		if ($query->have_posts()) {
+   			// Loop through the posts
+   			while ($query->have_posts()) {
+   				$query->the_post();
+   				// Display the post content
+   				get_template_part('partials/acta_whatson', 'archive');
+   			}
+   		}
+
+   		// Reset the post data
+   		wp_reset_postdata();
+
+   		echo '</div>';
+
+   		// Get past events ----------------------------
+   		$today = date('Ymd');
+
+   		echo '<div class="whatson-past">';
+
+   		echo '<h2>Previous Productions</h2>';
+
+   		// Set up the query arguments
+   		$args = [
+   			'post_type' => 'acta_whatson',
+   			'meta_query' => [
+   				[
+   					'key' => 'end_date',
+   					'value' => $today,
+   					'compare' => '<',
+   					'type' => 'DATE',
+   				],
+   			],
+   		];
+
+   		// Run the query
+   		$query = new WP_Query($args);
+
+   		// Check if there are any posts
+   		if ($query->have_posts()) {
+   			// Loop through the posts
+   			while ($query->have_posts()) {
+   				$query->the_post();
+   				// Display the post content
+   				get_template_part('partials/acta_whatson', 'archive');
+   			}
+   		}
+
+   		// Reset the post data
+   		wp_reset_postdata();
+
+   		echo '</div>';
+
+   		echo '</div>'; //container
+
    		do_action('generate_after_loop', 'archive');
    	else:
    		generate_do_template_part('none');

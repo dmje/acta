@@ -29,10 +29,12 @@ function acta_whatson_times($postid)
 
 	if ($start_date == $end_date) {
 		$datetime_html = $pretty_start_date;
+	} else {
+		$datetime_html = $pretty_start_date . ' to ' . $pretty_end_date;
 	}
 
 	$datetime_html =
-		'<div class="acta-whatson-times"><h3>' . $datetime_html . '</h3></div>';
+		'<div class="acta-whatson-times"><h4>' . $datetime_html . '</h4></div>';
 
 	return $datetime_html;
 }
