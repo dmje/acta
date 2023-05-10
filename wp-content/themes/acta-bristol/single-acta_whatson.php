@@ -24,8 +24,6 @@ get_header();
 
    if (generate_has_default_loop()) {
    	while (have_posts()):
-   		echo 'ARGH';
-
    		the_post();
 
    		//generate_do_template_part( 'single' );

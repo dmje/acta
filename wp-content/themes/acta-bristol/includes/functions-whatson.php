@@ -63,4 +63,21 @@ function acta_booking_link($postid)
 	return $bookinglink_html;
 }
 
+// Remove 'archive' from whatson listing title
+// per https://generatepress.com/forums/topic/remove-prefix-before-title-on-cpt-archive-pages/#post-1438578
+
+add_filter('get_the_archive_title', function ($title) {
+	/*
+	if (is_tax()) {
+		$title = single_term_title('', false);
+	}
+	*/
+
+	if (is_post_type_archive('acta_whatson')) {
+		$title = 'Productions';
+	}
+
+	return $title;
+});
+
 ?>

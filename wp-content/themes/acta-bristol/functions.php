@@ -19,21 +19,14 @@ function thirty8_enqueue_mainstylesheet()
 
 add_action('wp_enqueue_scripts', 'thirty8_enqueue_mainstylesheet');
 
-// Remove 'archive' from whatson listing title
-// per https://generatepress.com/forums/topic/remove-prefix-before-title-on-cpt-archive-pages/#post-1438578
+/* make gravity forms available to Editor role */
+// Per https://community.gravityforms.com/t/best-way-to-allow-the-editors-role-or-other-role-to-access-edit-create-etc-forms/11456
 
-add_filter('get_the_archive_title', function ($title) {
-	/*
-	if (is_tax()) {
-		$title = single_term_title('', false);
-	}
-	*/
-
-	if (is_post_type_archive('acta_whatson')) {
-		$title = 'Productions';
-	}
-
-	return $title;
-});
+function add_gf_cap()
+{
+	$role = get_role('editor');
+	$role->add_cap('gform_full_access');
+}
+add_action('admin_init', 'add_gf_cap');
 
 ?>
