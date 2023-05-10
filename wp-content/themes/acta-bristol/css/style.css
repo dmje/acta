@@ -223,13 +223,13 @@
 
 .hero-image {
 	flex-grow: 1;
-    object-fit: cover;
+	object-fit: cover;
 	max-height: 350px;
 }
 
 .featured-item-image a img {
-    aspect-ratio: 4/3;
-    object-fit: cover;
+	aspect-ratio: 4/3;
+	object-fit: cover;
 	margin-bottom: 10px;
 }
 
@@ -238,12 +238,12 @@
 }
 
 p.featured-item-description {
-    font-size: 16px;
-    margin-bottom: 15px;
+	font-size: 16px;
+	margin-bottom: 15px;
 }
 
 .featured-item-readmore {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 .featured-item-readmore a {
@@ -252,9 +252,14 @@ p.featured-item-description {
 	font-size: 16px;
 }
 
-
 /* CleverSnags tweak */
 #admintab {
 	width: 270px !important;
 	height: 30px !important;
+}
+
+/* Book now button container */
+.booknow-button-container {
+	margin-top: 40px;
+	margin-bottom: 40px;
 }
