@@ -14,7 +14,7 @@
 .widget_pages,
 .widget_share,
 .widget_shortcode {
-	background-color: var(--base) !important;
+	/* background-color: var(--base) !important; */
 }
 
 .widget h2 {
