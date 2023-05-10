@@ -12,7 +12,7 @@ if (file_exists($child_theme_override)) {
 } else {
 	 ?>
 
-<aside class="widget inner-padding widget_posts">
+<aside class="widget inner-padding widget_search">
 
 	<h2 class="widget-title">Search</h2>
 

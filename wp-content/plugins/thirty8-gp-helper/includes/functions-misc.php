@@ -23,6 +23,18 @@ function thirty8_enqueue_gpstylesheets()
 		false,
 		$thirty8_gpblocks_css_ver
 	);
+
+	// Styles for sidebars
+	$thirty8_gpsidebars_css_ver = date(
+		'ymd-Gis',
+		filemtime(THIRTY8_GPHELPER_PATH . '/css/sidebars.css')
+	);
+	wp_enqueue_style(
+		'thirty8-gp-sidebars',
+		THIRTY8_GPHELPER_URL . '/css/sidebars.css',
+		false,
+		$thirty8_gpsidebars_css_ver
+	);
 }
 
 add_action('wp_enqueue_scripts', 'thirty8_enqueue_gpstylesheets');
@@ -143,6 +155,9 @@ function thirty8_get_item_details($postid)
 
 	// Short Description
 	$item_details['short_desc'] = 'The short desc';
+
+	// Link
+	$item_details['permalink'] = get_permalink($postid);
 
 	if (!$attachment_id) {
 		if (get_field('default_thumbnail', 'option')) {

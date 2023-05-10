@@ -51,7 +51,7 @@ if (file_exists($child_theme_override)) {
 		</li>
 	</ul>
 
-</div>
+</aside>
 
 <?php
 } ?>
