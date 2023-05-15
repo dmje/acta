@@ -392,6 +392,10 @@ p.featured-item-description {
 
 /* Sponsor items grid in footer */
 
+.sponsor-container {
+	margin: 0 auto;
+}
+
 .sponsor-listing {
 	grid-gap: 0px;
 }
