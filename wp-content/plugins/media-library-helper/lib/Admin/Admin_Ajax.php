@@ -21,105 +21,122 @@ class Admin_Ajax {
 	 * @return jsonstring
 	 */
 	public function image_metadata() {
+		if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+			die();
+		}
+		
 		if (
-			isset( $_POST['cx_nonce'] )
-			&& isset( $_POST['type'] )
-			&& isset( $_POST['value'] )
-			&& isset( $_POST['image_id'] )
+			isset($_POST['cx_nonce'], $_POST['type'], $_POST['value'], $_POST['image_id'])
 		) {
-			$ajax_nonce = sanitize_text_field( wp_unslash( $_POST['cx_nonce'] ) );
-			if ( ! wp_verify_nonce( $ajax_nonce, 'ajax-nonce' ) ) {
+			$ajax_nonce = sanitize_text_field(wp_unslash($_POST['cx_nonce']));
+			if (!wp_verify_nonce($ajax_nonce, 'ajax-nonce')) {
 				return false;
 			}
-			$type         = sanitize_text_field( wp_unslash( $_POST['type'] ) );
-			$image_id     = intval( $_POST['image_id'] );
+	
+			$attachment_id = intval($_POST['image_id']);
+	
+			// Check if the attachment ID is valid and if the user has the capability to edit the post
+			if (!(is_numeric($attachment_id) && $attachment_id > 0 && current_user_can('edit_post', $attachment_id))) {
+				return false;
+			}
+	
+			$type = sanitize_text_field(wp_unslash($_POST['type']));
+			$value = wp_unslash($_POST['value']);
 			$update_value = '';
-			if ( 'alt' === $type ) {
-				$value = sanitize_text_field( wp_unslash( $_POST['value'] ) );
-				update_post_meta( $image_id, '_wp_attachment_image_alt', $value );
-				$update_value = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
-			}
-			if ( 'description' === $type ) {
-				$postarr = array(
-					'ID'           => $image_id,
-					'post_content' => wp_kses(
-						wp_unslash( $_POST['value'] ),
-						$this->content_allow_html()
-					),
+			$sanitized_value = ('alt' === $type) ? sanitize_text_field($value) : wp_kses($value, $this->content_allow_html());
+	
+			if ('title' === $type) {
+				$updated_data = array(
+					'ID' => $attachment_id,
+					'post_title' => $sanitized_value
 				);
-				wp_update_post( $postarr );
-				$attachment   = get_post( $image_id );
-				$update_value = $attachment->post_content;
-			}
-			if ( 'caption' === $type ) {
+				wp_update_post($updated_data, true);
+				$update_value = get_the_title($attachment_id);
+			} elseif ('alt' === $type) {
+				update_post_meta($attachment_id, '_wp_attachment_image_alt', $sanitized_value);
+				$update_value = get_post_meta($attachment_id, '_wp_attachment_image_alt', true);
+			} else {
 				$postarr = array(
-					'ID'           => $image_id,
-					'post_excerpt' => wp_kses(
-						wp_unslash( $_POST['value'] ),
-						$this->content_allow_html()
-					),
+					'ID' => $attachment_id
 				);
-				wp_update_post( $postarr );
-				$attachment   = get_post( $image_id );
-				$update_value = $attachment->post_excerpt;
+	
+				if ('description' === $type) {
+					$postarr['post_content'] = $sanitized_value;
+					$post_field = 'post_content';
+				} elseif ('caption' === $type) {
+					$postarr['post_excerpt'] = $sanitized_value;
+					$post_field = 'post_excerpt';
+				}
+	
+				if (isset($postarr['post_content']) || isset($postarr['post_excerpt'])) {
+					wp_update_post($postarr);
+					$attachment = get_post($attachment_id);
+					$update_value = $attachment->{$post_field};
+				}
 			}
-			wp_send_json( $update_value );
+	
+			wp_send_json($update_value);
 			wp_die();
 		}
 	}
+	
+	
+
 	/**
 	 * Bulk edit option.
 	 */
 	public function attachment_save_bulk_edit() {
-		if (
-			isset( $_POST['cx_nonce'] )
-			&& isset( $_POST['alt'] )
-			&& isset( $_POST['caption'] )
-			&& isset( $_POST['description'] )
-			&& isset( $_POST['text_change'] )
-		) {
-			$ajax_nonce = sanitize_text_field( wp_unslash( $_POST['cx_nonce'] ) );
-			if ( ! wp_verify_nonce( $ajax_nonce, 'ajax-nonce' ) ) {
+		if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+			die();
+		}
+		$required_fields = array('cx_nonce', 'title', 'alt', 'caption', 'description', 'text_change');
+		foreach ($required_fields as $field) {
+			if (!isset($_POST[$field])) {
 				return false;
 			}
-			if ( empty( $_POST['post_ids'] ) ) {
-				die();
+		}
+		$ajax_nonce = sanitize_text_field(wp_unslash($_POST['cx_nonce']));
+		if (!wp_verify_nonce($ajax_nonce, 'ajax-nonce')) {
+			return false;
+		}
+		if (empty($_POST['post_ids'])) {
+			die();
+		}
+		$data = array();
+		foreach (array('alt', 'title', 'caption', 'description', 'post_ids', 'text_change') as $field) {
+			if ($field === 'title' || $field === 'caption' || $field === 'description') {
+				$data[$field] = wp_kses(wp_unslash($_POST[$field]), $this->content_allow_html());
+			} else {
+				$data[$field] = sanitize_text_field(wp_unslash($_POST[$field]));
 			}
-			$alt         = sanitize_text_field( wp_unslash( $_POST['alt'] ) );
-			$caption     = wp_kses(
-				wp_unslash( $_POST['caption'] ),
-				$this->content_allow_html()
-			);
-			$description = wp_kses(
-				wp_unslash( $_POST['description'] ),
-				$this->content_allow_html()
-			);
-			$post_ids    = sanitize_text_field( wp_unslash( $_POST['post_ids'] ) );
-			$post_ids    = explode( ',', $post_ids );
-			$text_change = trim( sanitize_text_field( wp_unslash( $_POST['text_change'] ) ) );
-
-			if ( ucwords( $text_change ) !== ucwords( trim( $caption ) ) ) {
-				$my_post['post_excerpt'] = $caption;
+		}
+		$post_ids = explode(',', $data['post_ids']);
+		$text_change = trim($data['text_change']);
+		$my_post = array();
+		foreach (array('title' => 'post_title', 'caption' => 'post_excerpt', 'description' => 'post_content') as $key => $value) {
+			if (ucwords($text_change) !== ucwords(trim($data[$key]))) {
+				$my_post[$value] = $data[$key];
 			}
-			if ( ucwords( $text_change ) !== ucwords( trim( $description ) ) ) {
-				$my_post['post_content'] = $description;
+		}
+		foreach ($post_ids as $id) {
+			if (!(is_numeric($id) && $id > 0 && current_user_can('edit_post', $id))) {
+				return false;
 			}
-			foreach ( $post_ids as $id ) {
-				if ( ucwords( $text_change ) !== ucwords( trim( $alt ) ) ) {
-					update_post_meta( $id, '_wp_attachment_image_alt', $alt );
-				}
-				$my_post['ID'] = $id;
-				if ( 1 < count( $my_post ) ) {
-					wp_update_post( $my_post );
-				}
+			if (ucwords($text_change) !== ucwords(trim($data['alt']))) {
+				update_post_meta($id, '_wp_attachment_image_alt', $data['alt']);
+			}
+			$my_post['ID'] = $id;
+			if (count($my_post) > 1) {
+				wp_update_post($my_post);
 			}
 		}
 		$return = array(
 			'message' => 'Saved',
-			'status'  => true,
+			'status' => true,
 		);
-		wp_send_json( $return );
+		wp_send_json($return);
 	}
+	
 	/**
 	 * Content Validation.
 	 *
@@ -152,4 +169,5 @@ class Admin_Ajax {
 			'code'       => array(),
 		);
 	}
+
 }

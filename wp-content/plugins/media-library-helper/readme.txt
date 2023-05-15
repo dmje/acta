@@ -3,7 +3,7 @@ Contributors: cxntech, cxnmedia
 Tags: Alt tag, Image caption, Bulk edit, Media Library, SEO
 Requires at least: 4.8
 Stable tag: trunk.
-Tested up to: 6.1
+Tested up to: 6.2
 Requires PHP: 5.6.39
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -12,19 +12,20 @@ Add or edit or bulk edit image ALT tag, caption & description with one click str
 
 
 == Description ==
-If you have a large number of images in your WordPress media library and are concerned about updating their ALT tags, captions, or descriptions, worry no more. This plugin allows you to easily modify, delete, or update these elements with just a few clicks, directly from the media library page in your WordPress dashboard.
+If you have a large number of images in your WordPress media library and are concerned about updating their ALT tags, captions, descriptions or titles, worry no more. This plugin allows you to easily modify, delete, or update these elements with just a few clicks directly from the media library page in your WordPress dashboard.
 
-This plugin is the perfect solution if you wish to update metadata for multiple images without visiting each edit page. Accessing the WordPress media library page lets you easily view the existing images' alt tags, captions, and descriptions. The plugin also identifies the images without an assigned ALT tag, caption, or description, and enables you to update them quickly and easily with just a few clicks. 
+This plugin is the perfect solution to update metadata for multiple images without visiting each edit page. Accessing the WordPress media library page lets you easily view the existing images' alt tags, captions, descriptions and titles. The plugin also identifies the images without an assigned ALT tag, caption, or description, enabling you to update them quickly and easily with just a few clicks. 
 
-On-page SEO is a crucial element in boosting your website's SEO score, and assigning proper image ALT tags to every image on your website is critical. With the help of this plugin, you can quickly identify images with empty or blank ALT tags, blank captions or blank descriptions in your media library and update them to enhance your SEO score.
+On-page SEO is crucial in boosting your website's SEO score, and assigning proper image ALT tags to every image on your website is critical. With the help of this plugin, you can quickly identify images with empty or blank ALT tags, blank captions or descriptions in your media library and update them to enhance your SEO score.
 
 
 = Features =
-1. Add/edit/update the image ALT tag, caption & description with one click directly from WordPress Media Library
+1. Add/edit/update the image titles, ALT tag, caption & description with one click directly from WordPress Media Library
 1. Search for a specific SEO keyword assigned to your images as an alt tag, caption or description.
 1. Search for blank or empty ALT tags, captions and descriptions and update/edit as needed.
 1. Sort media library images by ALT tag, image caption or image Description.
 1. Bulk edit image ALT tag or alt attribute
+1. Bulk edit image title
 1. Bulk edit image caption
 1. Bulk edit image description
 1. Improve SEO score by assigning the proper image metadata.
@@ -35,7 +36,7 @@ On-page SEO is a crucial element in boosting your website's SEO score, and assig
 1. From Dashboard, go to media --> Library --> Open the "List View"
 1. Unlock the edit mode. (You will see a button at the top, named "Edit mode is locked")
 1. Continue updating image ALT text, caption and description as you need.
-1. Once finished, just keep the edit mode Locked again.
+1. Once finished, keep the edit mode Locked again.
 
 = Plugin Documentation =
 Coming Soon
@@ -64,9 +65,9 @@ Coming Soon
 
 == Frequently Asked Questions ==
 
-= Will this plugin update existing images ALT tags, captions or descriptions in the media library? =
+= Will this plugin update existing images title, ALT tags, captions or descriptions in the media library? =
 
-This plugin will not automatically update existing images' metadata in the media library. Once you install this plugin, then you have to update the image ALT Tag (ALT Text), Caption, and Description manually using this plugin.
+This plugin will not automatically update existing images' metadata in the media library. Once you install this plugin, then you have to update the image title, ALT Tag (ALT Text), Caption, and Description manually using this plugin.
 
 = I can't see image ALT, Caption or Description columns inside Media Library =
 
@@ -80,11 +81,21 @@ Go to the list view in your media library dashboard, then select the images you 
 
 Go to the list view in your media library dashboard. Keep the search box empty or blank. Select alt, caption or description from the search box dropdown list as you want and finally, click on filter.
 
-= I have updated/modified the image ALT tags, captions or descriptions for some of the images, but those images still have the old ALT tags, captions or descriptions where they are attached  =
+= I have updated/modified the image titles, ALT tags, captions or descriptions for some of the images, but those images still have the old titles, ALT tags, captions or descriptions where they are attached  =
 
-This usually happens when the image ALT tag, caption or descriptions have been hard-coded into your pages or posts. In other words, those image metadata are not being called dynamically from the media library database. If your pages/posts have hard-coded image metadata or use a page builder that provides a separate option to add image ALT tags, captions or descriptions, then updating image metadata from the WordPress media library won't help. You need to go to that specific page or post and need to find out the existing hard-coded image alt tag, and replace them as you need. 
+This usually happens when the image titles, ALT tag, caption or descriptions have been hard-coded into your pages or posts. In other words, those image metadata are not being called dynamically from the media library database. If your pages/posts have hard-coded image metadata or use a page builder that provides a separate option to add image ALT tags, captions or descriptions, then updating image metadata from the WordPress media library won't help. You need to go to that specific page or post and need to find out the existing hard-coded image alt tag, and replace them as you need. 
+
+= Will this plugin update the images URLs or slugs as soon as I modify the image titles?  =
+
+No, modifying the image titles using this plugin will not update the image URLs or slugs. Only the image titles will be updated, while the URLs or slugs will remain unchanged.
 
 == Changelog ==
+
+= 1.2.0 =
+* New feature: Title editing functionality has been added, allowing users to modify titles
+* Code optimization and security enhancements
+* Minor CSS adjustments
+* Updated readme.txt
 
 = 1.1.0 =
 * New features integrated. Users can now search directly in the media library search box for blank or empty alt tags, captions and descriptions.

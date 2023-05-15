@@ -15,7 +15,7 @@
  * Plugin Name:       Media Library Helper by Codexin
  * Plugin URI:        https://wordpress.org/plugins/media-library-helper/
  * Description:       Add or edit or Bulk edit image ALT tag, caption & description with one click straight from WordPress media library to boost your SEO score.
- * Version:           1.1.0
+ * Version:           1.2.0
  * Author:            Codexin Technologies
  * Author URI:        https://codexin.com/
  * License:           GPL-2.0+

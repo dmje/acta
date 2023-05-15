@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Codexins <zaman@codexin.com>\n"
 "Last-Translator: Codexins <zaman@codexin.com>\n"
-"POT-Creation-Date: 2023-02-27 11:08+0000\n"
+"POT-Creation-Date: 2023-05-15 10:02+0000\n"
 "Report-Msgid-Bugs-To: https://codexin.com/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -219,47 +219,51 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: lib/Admin/Extended_Media_List_Table.php:97
+#: lib/Admin/Extended_Media_List_Table.php:83
 msgid "Bulk Edit"
 msgstr ""
 
-#: lib/Admin/Extended_Media_List_Table.php:97
+#: lib/Admin/Extended_Media_List_Table.php:83
 msgid "Quick Edit"
 msgstr ""
 
-#: lib/Admin/Extended_Media_List_Table.php:115, lib/Admin/Media.php:36, lib/Admin/Media.php:168
+#: lib/Admin/Extended_Media_List_Table.php:101, lib/Admin/Media.php:36, lib/Admin/Media.php:168
 msgid "Alt"
 msgstr ""
 
-#: lib/Admin/Extended_Media_List_Table.php:121, lib/Admin/Media.php:37, lib/Admin/Media.php:169
+#: lib/Admin/Extended_Media_List_Table.php:107, lib/Admin/Media.php:37, lib/Admin/Media.php:169
 msgid "Caption"
 msgstr ""
 
-#: lib/Admin/Extended_Media_List_Table.php:127, lib/Admin/Media.php:38, lib/Admin/Media.php:170
+#: lib/Admin/Extended_Media_List_Table.php:113, lib/Admin/Media.php:38, lib/Admin/Media.php:170
 msgid "Description"
 msgstr ""
 
-#: lib/Admin/Extended_Media_List_Table.php:172
+#: lib/Admin/Extended_Media_List_Table.php:119
+msgid "Title"
+msgstr ""
+
+#: lib/Admin/Extended_Media_List_Table.php:164
 msgid "Cancel"
 msgstr ""
 
-#: lib/Admin/Extended_Media_List_Table.php:182, lib/Admin/Extended_Media_List_Table.php:176
+#: lib/Admin/Extended_Media_List_Table.php:174, lib/Admin/Extended_Media_List_Table.php:168
 msgid "Update"
 msgstr ""
 
-#: lib/Admin/Extended_Media_List_Table.php:223
+#: lib/Admin/Extended_Media_List_Table.php:215
 msgid "Edit mode is locked"
 msgstr ""
 
-#: lib/Admin/Extended_Media_List_Table.php:224
+#: lib/Admin/Extended_Media_List_Table.php:216
 msgid "Edit mode is unlocked"
 msgstr ""
 
-#: lib/Admin/Extended_Media_List_Table.php:255
+#: lib/Admin/Extended_Media_List_Table.php:247
 msgid "Search"
 msgstr ""
 
-#: lib/Admin/Extended_Media_List_Table.php:258
+#: lib/Admin/Extended_Media_List_Table.php:250
 msgid "Filter by type"
 msgstr ""
 

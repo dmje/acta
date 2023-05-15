@@ -32,20 +32,6 @@ class Extended_Media_List_Table extends \WP_Media_List_Table {
 	}
 
 	/**
-	 * Handles the title column output.
-	 *
-	 * @since 4.3.0
-	 *
-	 * @global string $mode List table view mode.
-	 *
-	 * @param WP_Post $post The current WP_Post object.
-	 */
-	public function column_title( $post ) {
-		parent::column_title( $post );
-		get_inline_data( $post );
-	}
-
-	/**
 	 * Outputs the hidden row displayed when inline editing
 	 *
 	 * @since 3.1.0
@@ -126,6 +112,12 @@ class Extended_Media_List_Table extends \WP_Media_List_Table {
 								<label class="alignleft">
 									<span class="title"><?php esc_html_e( 'Description', 'media-library-helper' ); ?></span>
 									<input type="text" name="description" value="">
+								</label>
+							</div>
+							<div class="field-wrap full-width">
+								<label class="alignleft">
+									<span class="title"><?php esc_html_e( 'Title', 'media-library-helper' ); ?></span>
+									<input type="text" name="title" value="">
 								</label>
 							</div>
 						<?php endif; // $bulk ?>
@@ -286,5 +278,79 @@ class Extended_Media_List_Table extends \WP_Media_List_Table {
 		<?php
 	}
 
+	/**
+	 * Handles the title column output.
+	 *
+	 * @since 4.3.0
+	 *
+	 * @global string $mode List table view mode.
+	 *
+	 * @param WP_Post $post The current WP_Post object.
+	 */
+	public function column_title( $post ) {
+		list( $mime ) = explode( '/', $post->post_mime_type );
 
+		$attachment_id = $post->ID;
+
+		if ( has_post_thumbnail( $post ) ) {
+			$thumbnail_id = get_post_thumbnail_id( $post );
+
+			if ( ! empty( $thumbnail_id ) ) {
+				$attachment_id = $thumbnail_id;
+			}
+		}
+
+		$title      = _draft_or_post_title();
+		$title_wraper_start = sprintf(
+			'<div class="edit-column-content" data-content-type="title" data-image-id="%s" contenteditable="false">',
+			$attachment_id
+		);
+
+		$title_wraper_end = '</div>';
+		$thumb      = wp_get_attachment_image( $attachment_id, array( 60, 60 ), true, array( 'alt' => '' ) );
+		$link_start = '';
+		$link_end   = '';
+
+		if ( current_user_can( 'edit_post', $post->ID ) && ! $this->is_trash ) {
+			$link_start = sprintf(
+				'<a href="%s" aria-label="%s" class="cdxn-title-link">',
+				get_edit_post_link( $post->ID ),
+				/* translators: %s: Attachment title. */
+				esc_attr( sprintf( __( '&#8220;%s&#8221; (Edit)' ), $title ) )
+			);
+			$link_end = '</div></a>';
+		}
+
+		$class = $thumb ? ' class="has-media-icon"' : '';
+		?>
+		<strong<?php echo $class; ?>>
+			<?php
+			echo $link_start;
+
+			if ( $thumb ) :
+				?>
+				<span class="media-icon <?php echo sanitize_html_class( $mime . '-icon' ); ?>"><?php echo $thumb; ?></span>
+				<?php
+			endif;
+
+			echo $title_wraper_start . $title . $title_wraper_end . $link_end;
+
+			_media_states( $post );
+			?>
+		</strong>
+		<p class="filename">
+			<span class="screen-reader-text">
+				<?php
+				/* translators: Hidden accessibility text. */
+				_e( 'File name:' );
+				?>
+			</span>
+			<?php
+			$file = get_attached_file( $post->ID );
+			echo esc_html( wp_basename( $file ) );
+			?>
+		</p>
+		<?php
+		get_inline_data( $post );
+	}
 }

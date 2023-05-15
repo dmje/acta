@@ -51,7 +51,7 @@
         url: cdxn_mlh_script.admin_ajax,
         data: data,
         beforeSend: function beforeSend() {
-          that.parent('td').addClass('spiner-add');
+          that.closest('td').addClass('spiner-add');
           that.append('<div class="loder-wrapper"><span class="ajaxloader"></span></div>');
         },
         success: function success(response) {
@@ -62,7 +62,7 @@
           console.log('Error Found');
         },
         complete: function complete() {
-          that.parent('td').removeClass('spiner-add');
+          that.closest('td').removeClass('spiner-add');
         }
       });
     });
@@ -70,6 +70,7 @@
       event.preventDefault();
       var editable = String($(this).attr('data-editable'));
       var drag = '';
+      var link = $('.title-link');
       if ($('.wp-list-table tr').hasClass('ui-draggable')) {
         drag = 'drag-enabled';
       }
@@ -82,6 +83,12 @@
           });
         }
         $('.edit-column-content').attr('contenteditable', 'true');
+        $("a.cdxn-title-link").on('click', function (e) {
+          var link = $(this);
+          if (!link.is(event.target) && link.has(event.target).length === 0) {
+            e.preventDefault();
+          }
+        });
       }
       if ('true' === editable) {
         $('.table-editable').attr('data-editable', 'false');
@@ -92,6 +99,7 @@
             disabled: false
           });
         }
+        $("a.cdxn-title-link").off('click');
       }
     });
   });
@@ -104,6 +112,7 @@ jQuery(function ($) {
     bulk_edit_row.find('input[name="alt"]').val(cdxn_mlh_script.text_no_change);
     bulk_edit_row.find('input[name="caption"]').val(cdxn_mlh_script.text_no_change);
     bulk_edit_row.find('input[name="description"]').val(cdxn_mlh_script.text_no_change);
+    bulk_edit_row.find('input[name="title"]').val(cdxn_mlh_script.text_no_change);
     $('body').on('click', '.bulk-edit-attachment  input[name="bulk_edit"]', function (event) {
       event.preventDefault();
       // let's add the WordPress default spinner just before the button
@@ -111,6 +120,7 @@ jQuery(function ($) {
       // define: prices, featured products and the bulk edit table row
       var bulk_edit_row = $('tr#bulk-edit'),
         post_ids = new Array();
+      var title = bulk_edit_row.find('input[name="title"]').val();
       var alt = bulk_edit_row.find('input[name="alt"]').val();
       var caption = bulk_edit_row.find('input[name="caption"]').val();
       var description = bulk_edit_row.find('input[name="description"]').val();
@@ -135,6 +145,8 @@ jQuery(function ($) {
           // wp_ajax action hook
           post_ids: post_ids.toString(),
           // array of post IDs
+          title: title,
+          // new title
           alt: alt,
           // new alt
           caption: caption,

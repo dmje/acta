@@ -1,5 +1,4 @@
 <?php
-
 // Generic logging function
 function thirty8log($msg)
 {
@@ -322,4 +321,3 @@ function thirty8_login_logo()
 }
 add_action('login_enqueue_scripts', 'thirty8_login_logo');
 ?>
-
