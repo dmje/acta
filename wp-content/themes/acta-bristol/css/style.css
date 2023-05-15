@@ -397,7 +397,10 @@ p.featured-item-description {
 }
 
 .sponsor-listing {
-	grid-gap: 0px;
+	grid-gap: 10px;
+	@media screen and (min-width: 438px) {
+		grid-gap: 0px;
+	}
 }
 
 .sponsor-item {
