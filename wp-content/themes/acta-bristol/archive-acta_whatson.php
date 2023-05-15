@@ -62,6 +62,9 @@ get_header();
    					'type' => 'DATE',
    				],
    			],
+   			'meta_key' => 'end_date',
+   			'orderby' => 'meta_value',
+   			'order' => 'ASC',
    		];
 
    		// Run the query
@@ -100,6 +103,9 @@ get_header();
    					'type' => 'DATE',
    				],
    			],
+   			'meta_key' => 'end_date',
+   			'orderby' => 'meta_value',
+   			'order' => 'DESC',
    		];
 
    		// Run the query
