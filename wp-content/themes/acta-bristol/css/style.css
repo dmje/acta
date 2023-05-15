@@ -365,6 +365,16 @@ p.featured-item-description {
 	margin-bottom: 30px;
 }
 
+/* Read more button */
+
+.read-more {
+	background-color: var(--contrast) !important;
+}
+
+.read-more a {
+	color: #ffffff;
+}
+
 /* Book now */
 
 .booknow-button {
