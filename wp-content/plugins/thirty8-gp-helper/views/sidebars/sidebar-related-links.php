@@ -1,10 +1,5 @@
 <?php
 
-function TMP_CheckExternalLink($url)
-{
-	return '';
-}
-
 // Check to see if there is an override in the child theme
 
 $child_theme_override =

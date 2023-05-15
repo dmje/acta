@@ -21,6 +21,9 @@ include 'functions-blocks.php';
 // Sugar Calendar
 include 'functions-sugarcalendar.php';
 
+// Images and media
+include 'functions-media.php';
+
 // Make your plugin options pages here
 
 if (function_exists('acf_add_options_page')) {

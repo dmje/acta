@@ -68,13 +68,6 @@ class PostmanEmailLogs {
 
         foreach ( $this->fields as $field ) {
 
-            if ( $field == 'original_message' || $field == 'session_transcript' ) {
-
-                $sql .= "`" . $field . "` longtext DEFAULT NULL,";
-                continue;
-
-            }
-
             if( $field == 'time' ) {
 
                 $sql .= "`" . $field . "` BIGINT(20) DEFAULT NULL,";
@@ -82,28 +75,86 @@ class PostmanEmailLogs {
 
             } 
 
-            $sql .= "`" . $field . "` varchar(255) DEFAULT NULL,";
+            $sql .= "`" . $field . "` longtext DEFAULT NULL,";
             
         }
 
-        $sql .=  "PRIMARY KEY (`id`)) ENGINE=InnoDB CHARSET={$this->db->charset} COLLATE={$this->db->collate};";
+        $sql .=  "PRIMARY KEY (`id`)) ENGINE=InnoDB";
+        $sql .= empty( $this->db->charset ) ? '' : " CHARSET={$this->db->charset}";
+        $sql .= empty( $this->db->collate ) ? '' : " COLLATE={$this->db->collate}";
+        $sql .= ";";
 
-        dbDelta( $sql );
+        $response = dbDelta( $sql );
 
-        $sql = "
-        CREATE TABLE IF NOT EXISTS `{$this->db->prefix}{$this->meta_table}` (
-            `id` bigint(20) NOT NULL AUTO_INCREMENT,
-            `log_id` bigint(20) NOT NULL,
-            `meta_key` varchar(255) DEFAULT NULL,
-            `meta_value` varchar(255) DEFAULT NULL,
-            PRIMARY KEY (`id`)
-        ) ENGINE=InnoDB CHARSET={$this->db->charset} COLLATE={$this->db->collate};";
+        if( !$this->db->last_error ) {
+            
+            $sql = "
+            CREATE TABLE IF NOT EXISTS `{$this->db->prefix}{$this->meta_table}` (
+                `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                `log_id` bigint(20) NOT NULL,
+                `meta_key` longtext DEFAULT NULL,
+                `meta_value` longtext DEFAULT NULL,
+                PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB";
 
-        dbDelta( $sql );
+            $sql .= empty( $this->db->charset ) ? '' : " CHARSET={$this->db->charset}";
+            $sql .= empty( $this->db->collate ) ? '' : " COLLATE={$this->db->collate}";
+            $sql .= ";";
+    
+            $response = dbDelta( $sql );
 
-        update_option( 'postman_db_version', POST_SMTP_DB_VERSION );
+        }
+
+        if( !$this->db->last_error ) {
+
+            update_option( 'postman_db_version', POST_SMTP_DB_VERSION );
+
+        }
 
     }
+
+
+    /**
+     * Update Table
+     * 
+     * @since 2.5.1
+     * @version 1.0.0
+     */
+    public function update_table() {
+
+        $sql = "ALTER TABLE `{$this->db->prefix}{$this->db_name}`
+        MODIFY COLUMN solution longtext DEFAULT NULL,
+        MODIFY COLUMN success longtext DEFAULT NULL,
+        MODIFY COLUMN from_header longtext DEFAULT NULL,
+        MODIFY COLUMN to_header longtext DEFAULT NULL,
+        MODIFY COLUMN cc_header longtext DEFAULT NULL,
+        MODIFY COLUMN bcc_header longtext DEFAULT NULL,
+        MODIFY COLUMN reply_to_header longtext DEFAULT NULL,
+        MODIFY COLUMN transport_uri longtext DEFAULT NULL,
+        MODIFY COLUMN original_to longtext DEFAULT NULL,
+        MODIFY COLUMN original_subject longtext DEFAULT NULL,
+        MODIFY COLUMN original_headers longtext DEFAULT NULL;";
+        
+        $response = $this->db->query( $sql );
+
+        if( !$this->db->last_error ) {
+
+            $sql = "ALTER TABLE `{$this->db->prefix}{$this->meta_table}`
+            MODIFY COLUMN meta_key longtext,
+            MODIFY COLUMN meta_value longtext;";
+            
+            $response = $this->db->query( $sql );
+
+        }
+
+        if( !$this->db->last_error ) {
+
+            update_option( 'postman_db_version', POST_SMTP_DB_VERSION );
+
+        }
+
+    }
+
 
     public static function get_data( $post_id ) {
         $fields = array();
@@ -574,6 +625,37 @@ class PostmanEmailLogs {
             wp_send_json( $response );
 
         }
+
+    }
+
+
+    /**
+     * Drop Tables
+     * 
+     * @since 2.5.2
+     * @version 1.0.0
+     */
+    public function uninstall_tables() {
+
+        $sql = "DROP TABLE IF EXISTS `{$this->db->prefix}{$this->db_name}`;";
+        $response = $this->db->query( $sql );
+
+        if( !$this->db->last_error ) {
+
+            $sql = "DROP TABLE IF EXISTS `{$this->db->prefix}{$this->meta_table}`;";
+            $response = $this->db->query( $sql );
+
+        }
+
+        if( !$this->db->last_error ) {
+
+            delete_option( 'postman_db_version' );
+
+            return true;
+
+        }
+
+        return false;
 
     }
 

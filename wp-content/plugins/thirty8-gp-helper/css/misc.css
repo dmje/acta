@@ -1,0 +1,23 @@
+/* CSS used with the sponsor logo function in equalgrid mode*/
+
+.sponsor-container {
+	max-width: 1100px;
+	margin-left: 200px;
+	margin-right: 200px;
+	padding: 20px;
+}
+
+.sponsor-listing {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	grid-gap: 20px;
+}
+
+.sponsor-item {
+	padding: 20px;
+	text-align: center;
+}
+
+.sponsor-item img {
+	max-height: 100px;
+}

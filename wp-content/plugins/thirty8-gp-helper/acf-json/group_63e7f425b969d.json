@@ -50,7 +50,7 @@
             "name": "event_sidebar",
             "aria-label": "",
             "type": "post_object",
-            "instructions": "Select the sidebar to use on event pages",
+            "instructions": "Select the sidebar to use on event pages. Only valid if you are using SugarCalendar.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -61,6 +61,7 @@
             "post_type": [
                 "sidebar"
             ],
+            "post_status": "",
             "taxonomy": "",
             "return_format": "object",
             "multiple": 0,
@@ -73,7 +74,7 @@
             "name": "object_sidebar",
             "aria-label": "",
             "type": "post_object",
-            "instructions": "Select the sidebar to use on object pages",
+            "instructions": "Select the sidebar to use on object pages. Only valid if you are using CultureObject.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -84,6 +85,7 @@
             "post_type": [
                 "sidebar"
             ],
+            "post_status": "",
             "taxonomy": "",
             "return_format": "object",
             "multiple": 0,
@@ -216,8 +218,93 @@
             "return_format": "string"
         },
         {
+            "key": "field_645bd5894fa9e",
+            "label": "Sponsors",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_645bd485da493",
+            "label": "Sponsor Details",
+            "name": "sponsor_details",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Sponsor",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_645bd503da494",
+                    "label": "Sponsor Logo",
+                    "name": "sponsor_logo",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "preview_size": "medium",
+                    "parent_repeater": "field_645bd485da493"
+                },
+                {
+                    "key": "field_645bd516da495",
+                    "label": "Sponsor Link",
+                    "name": "sponsor_link",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "parent_repeater": "field_645bd485da493"
+                }
+            ]
+        },
+        {
             "key": "field_63e7f4535c597",
-            "label": "Social Settings",
+            "label": "Social Media",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -607,5 +694,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1683542446
+    "modified": 1683740240
 }

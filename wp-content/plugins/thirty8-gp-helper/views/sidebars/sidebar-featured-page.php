@@ -25,12 +25,12 @@ if (file_exists($child_theme_override)) {
 	$featuredpage_imagealt = $featuredpage_details['image_alt'];
 	?>
 
-<aside class="widget widget_featuredpage">
+<div class="featured-page-widget feature-block widget">
 	
 	<a class="feature-block-image" href="<?php echo $featuredpage_link; ?>"><img class="content-block-featured-image" src="<?php echo $featuredpage_imagesrc; ?>" alt="<?php echo $featuredpage_imagealt; ?>" /></a>
 	
 	<div class="feature-block-text">
-		<h2><?php echo $featuredpage_title; ?></h2>
+		<h3><a href="<?php echo $featuredpage_link; ?>"><?php echo $featuredpage_title; ?></a></h3>
 		<div class="page-summary"><?php echo $featuredpage_blurb; ?></div>
 		<a class="more-link button" href="<?php echo $featuredpage_link; ?>">
 			<?php do_action('thirty8_readmore_text'); ?>
@@ -38,7 +38,7 @@ if (file_exists($child_theme_override)) {
 		</a>
 	</div>
 	
-</aside>
+</div>
 
 <?php
 } ?>

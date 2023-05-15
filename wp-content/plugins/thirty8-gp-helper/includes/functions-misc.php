@@ -24,16 +24,16 @@ function thirty8_enqueue_gpstylesheets()
 		$thirty8_gpblocks_css_ver
 	);
 
-	// Styles for sidebars
-	$thirty8_gpsidebars_css_ver = date(
+	// Misc styles
+	$thirty8_gpmisc_css_ver = date(
 		'ymd-Gis',
-		filemtime(THIRTY8_GPHELPER_PATH . '/css/sidebars.css')
+		filemtime(THIRTY8_GPHELPER_PATH . '/css/misc.css')
 	);
 	wp_enqueue_style(
-		'thirty8-gp-sidebars',
-		THIRTY8_GPHELPER_URL . '/css/sidebars.css',
+		'thirty8-gpmisc-blocks',
+		THIRTY8_GPHELPER_URL . '/css/misc.css',
 		false,
-		$thirty8_gpsidebars_css_ver
+		$thirty8_gpmisc_css_ver
 	);
 }
 
@@ -143,7 +143,7 @@ add_filter(
 function thirty8_get_item_details($postid)
 {
 	$item_details = [];
-	$image_size = '625x465';
+	$image_size = '800x600';
 
 	// Set defaults
 
@@ -155,9 +155,6 @@ function thirty8_get_item_details($postid)
 
 	// Short Description
 	$item_details['short_desc'] = 'The short desc';
-
-	// Link
-	$item_details['permalink'] = get_permalink($postid);
 
 	if (!$attachment_id) {
 		if (get_field('default_thumbnail', 'option')) {
@@ -275,5 +272,54 @@ function clever_snags()
 	}
 }
 add_action('wp_footer', 'clever_snags', 100);
+
+// Sponsor array
+
+function thirty8_sponsorlogos($options = '')
+{
+	$site_sponsors = get_field('sponsor_details', 'option');
+
+	if ($options == 'equalgrid') {
+		$html = '<div class="sponsor-container">';
+		$html .= '<div class="sponsor-listing">';
+		foreach ($site_sponsors as $sponsor) {
+			$html .= '<div class="sponsor-item">';
+			$sponsor_logo_src = $sponsor['sponsor_logo']['sizes']['medium'];
+			$sponsor_url = $sponsor['sponsor_link'];
+			$sponsor_logo_alt = $sponsor['sponsor_logo']['alt'];
+
+			$html .=
+				'<a href="' .
+				$sponsor_url .
+				'"><img src="' .
+				$sponsor_logo_src .
+				'" alt="' .
+				$sponsor_logo_alt .
+				'"/></a>';
+
+			$html .= '</div>';
+		}
+
+		$html .= '</div>';
+		$html .= '</div>';
+	}
+
+	return $html;
+}
+
+// Customised login screen logo
+
+function thirty8_login_logo()
+{
+	?>
+    <style type="text/css">
+        body.login div#login h1 a {
+            background-image: url(<?php echo THIRTY8_GPHELPER_URL; ?>/images/logo.png);            
+            padding-bottom: 30px;
+        }
+    </style>
+<?php
+}
+add_action('login_enqueue_scripts', 'thirty8_login_logo');
 ?>
 
