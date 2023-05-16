@@ -8,13 +8,25 @@ if (!defined('ABSPATH')) {
  * Plugin Name: Thirty8 Analytics and cookie popup helper
  * Plugin URI: http://thirty8.co.uk
  * Description: Easy analytics and cookie popup
- * Version: 0.1
+ * Version: 1.0
  * Author: Mike Ellis / Thirty8 Digital
  */
+
+require 'lib/plugin-update-checker-5.0/plugin-update-checker.php';
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+	'https://licensing.thirty8.co.uk/license/thirty8-analytics',
+	__FILE__, //Full path to the main plugin file or functions.php.
+	'thirty8-analytics'
+);
 
 // Paths
 define('THIRTY8_AH_PATH', plugin_dir_path(__FILE__));
 define('THIRTY8_AH_URL', plugin_dir_url(__FILE__));
+
+// Functions
+include 'functions.php';
 
 // Settings page
 
@@ -32,23 +44,55 @@ function my_acf_op_init()
 	}
 }
 
-// Insert the code
+// Display analytics, depending on cookies and whether user logged in or not
 
-function analytics_head()
+function thirty8_analytics_head()
 {
-	if (!is_user_logged_in()) {
-		echo get_field('gtm_head', 'options');
+	$display_analytics = '';
+
+	if (isset($_COOKIE['thirty8_cookie_prefs'])) {
+		// Thirty8 cookie preferences have been set and they don't like em
+
+		if ($_COOKIE['thirty8_cookie_prefs'] == 'ok') {
+			$display_analytics = true;
+		}
+		if ($_COOKIE['thirty8_cookie_prefs'] == 'notok') {
+			$display_analytics = false;
+		}
+	}
+
+	if ($display_analytics) {
+		if (!is_user_logged_in()) {
+			echo get_field('gtm_head', 'options');
+		}
 	}
 }
-add_action('wp_head', 'analytics_head');
 
-function analytics_body()
+add_action('wp_head', 'thirty8_analytics_head');
+
+function thirty8_analytics_body()
 {
-	if (!is_user_logged_in()) {
-		echo get_field('gtm_body', 'options');
+	$display_analytics = '';
+
+	if (isset($_COOKIE['thirty8_cookie_prefs'])) {
+		// Thirty8 cookie preferences have been set and they don't like em
+
+		if ($_COOKIE['thirty8_cookie_prefs'] == 'ok') {
+			$display_analytics = true;
+		}
+		if ($_COOKIE['thirty8_cookie_prefs'] == 'notok') {
+			$display_analytics = false;
+		}
+	}
+
+	if ($display_analytics) {
+		if (!is_user_logged_in()) {
+			echo get_field('gtm_body', 'options');
+		}
 	}
 }
-add_action('wp_body_open', 'analytics_body');
+
+add_action('wp_body_open', 'thirty8_analytics_body');
 
 // Save acf locally
 function thirty8_update_analytics_field_group($group)

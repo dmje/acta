@@ -3,12 +3,29 @@
     "title": "Analytics",
     "fields": [
         {
+            "key": "field_6463a372f8aa6",
+            "label": "Analytics code",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_645a2fb74fe25",
             "label": "Google Tag Manager HEAD code",
             "name": "gtm_head",
             "aria-label": "",
             "type": "textarea",
-            "instructions": "Paste in the code from GTM which should go in the <head> of the website",
+            "instructions": "Paste in the code from GTM which should go in the <head> of the website. If you are only using GA without GTM then include your code here.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -41,6 +58,104 @@
             "rows": "",
             "placeholder": "",
             "new_lines": ""
+        },
+        {
+            "key": "field_6463a385f8aa7",
+            "label": "Look and feel",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6463a334f8aa4",
+            "label": "Cookie Popup Location",
+            "name": "cookie_popup_location",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "bottombar": "Bottom Bar"
+            },
+            "default_value": "bottombar",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_6463a35ef8aa5",
+            "label": "Background Colour",
+            "name": "background_colour",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "enable_opacity": 0,
+            "return_format": "string"
+        },
+        {
+            "key": "field_6463a40ff8aa8",
+            "label": "Text Colour",
+            "name": "text_colour",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "enable_opacity": 0,
+            "return_format": "string"
+        },
+        {
+            "key": "field_6463a433f8aa9",
+            "label": "Cookie Text",
+            "name": "cookie_text",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "<strong>Cookies<\/strong><br\/>\r\nWe use analytics to help us understand how people use our site. This means we set a cookie. See our <a href=\"#\">cookie policy<\/a>.",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
         }
     ],
     "location": [
@@ -61,5 +176,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1683632269
+    "modified": 1684253869
 }

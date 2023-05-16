@@ -1,0 +1,35 @@
+/* Cookie popup */
+
+.thirty8-cookie-buttons button {
+	margin-right: 10px;
+	font-size: 12px;
+	padding: 5px;
+	margin: 2px;
+}
+
+.thirty8-cookie-buttons button a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.cookie-grid {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	grid-gap: 20px;
+}
+
+.cookie-grid-item {
+	padding: 20px;
+}
+
+.wide {
+	grid-column: 1 / span 2;
+}
+
+.narrow {
+	grid-column: 2 / span 1;
+}
+
+.cookie-grid-item p {
+	font-size: 14px !important;
+}
