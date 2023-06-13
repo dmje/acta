@@ -33,7 +33,7 @@ function cookie_popup()
 	switch ($cookie_popup_location) {
 		case 'bottombar':
 			$popup_styles =
-				'position:fixed;bottom:0;left:0;height:100px;width:100%;padding:5px;';
+				'z-index:1000 !important;position:fixed;bottom:0;left:0;height:100px;width:100%;padding:5px;';
 			$popup_styles .= 'background-color:' . $background_colour . ';';
 			$popup_styles .= 'color:' . $text_colour . ';';
 
@@ -47,8 +47,8 @@ function cookie_popup()
 		<div class="cookie-grid-item">
 			<div id="thirty8_cookieprefs"></div>
 			<div class="thirty8-cookie-buttons">
-				<button class="cookie-choice"><a href="<?php echo $oklink; ?>">Ok</a></button>
-				<button class="cookie-choice"><a href="<?php echo $notoklink; ?>">No thanks</a></button>
+				<button class="cookie-button"><a href="<?php echo $oklink; ?>">Ok</a></button>
+				<button class="cookie-button"><a href="<?php echo $notoklink; ?>">No thanks</a></button>
 			</div>
 			
 		</div>

@@ -30,19 +30,17 @@ if ($image_id) {
 
 	$image = get_field('default_featured_image', 'option');
 
-	/*
-	echo '<pre>';
-	print_r($image);
-	echo '</pre>';
-	*/
-
 	$heroimage_url = $image['sizes']['medium'];
 	$alt_text = $image['alt'];
 
-	echo 'hero = ' . $heroimage_url;
+	//echo 'hero = ' . $heroimage_url;
+
 }
+
 ?>
+	<a href="<?php echo get_the_permalink();?>">
 		<img src="<?php echo $heroimage_url; ?>" alt="<?php echo $alt_text; ?>"/>
+	</a>
 
 	 </div>
 	 
