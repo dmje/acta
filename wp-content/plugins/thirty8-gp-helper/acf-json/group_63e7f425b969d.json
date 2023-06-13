@@ -674,6 +674,26 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_6481f55f6bb6e",
+            "label": "Object archive intro",
+            "name": "object_archive_intro",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "This text is displayed at the top of the object archive listing page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
         }
     ],
     "location": [
@@ -694,5 +714,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1683740240
+    "modified": 1686238654
 }

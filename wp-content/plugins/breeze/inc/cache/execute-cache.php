@@ -229,6 +229,10 @@ function breeze_cache( $buffer, $flags ) {
 	if ( is_404() || is_search() || post_password_required() ) {
 		return $buffer;
 	}
+
+	// Filter to modify cache buffer before caching
+	$buffer = apply_filters('breeze_cache_buffer_before_processing', $buffer);
+
 	global $wp_filesystem, $breeze_current_url_path;
 	if ( empty( $wp_filesystem ) ) {
 		require_once( ABSPATH . '/wp-admin/includes/file.php' );
@@ -269,85 +273,14 @@ function breeze_cache( $buffer, $flags ) {
 
 	}
 
+	// Cross-origin safe link functionality
 	if ( isset( $GLOBALS['breeze_config']['cache_options']['breeze-cross-origin'] ) && filter_var( $GLOBALS['breeze_config']['cache_options']['breeze-cross-origin'], FILTER_VALIDATE_BOOLEAN ) ) {
-		// ------------------------------------------------------------------------------------------
 
-		$home_url = $GLOBALS['breeze_config']['homepage'];
-		$home_url = ltrim( $home_url, 'https:' );
-
+		// Buffer encoding
 		$buffer = mb_convert_encoding( $buffer, 'HTML-ENTITIES', 'UTF-8' );
-
-		$html_dom                     = new \DOMDocument();
-		$html_dom->preserveWhiteSpace = false;// phpcs:ignore
-		$html_dom->formatOutput       = false;// phpcs:ignore
-
-        preg_match_all( '/<script\b(?![^>]*\bsrc\s*=)[^>]*>(.*?)<\/script>/is', $buffer, $script_matches );
-
-		if ( ! empty( $script_matches ) && ! empty( $script_matches[0][0] ) ) {
-			foreach ( $script_matches[0] as $index => $script_js ) {
-				$buffer = str_replace( $script_js, '<!--{BREEZE_SCRIPT_PH' . $index . '}-->', $buffer );
-			}
-		}
-
-		libxml_use_internal_errors( true );
-		$html_dom->loadHTML( $buffer, LIBXML_NOERROR | LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );  //  | LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | HTML_PARSE_NOIMPLIED
-
-		$dom_last_error = libxml_get_last_error();
-		$dom_all_error  = libxml_get_errors();
-
-		$dom_xpath       = new \DOMXPath( $html_dom );
-		$replacement_rel = 'noopener noreferrer';
-		$noopener_rel    = 'noopener';
-		$noreferrer_rel  = 'noreferrer';
-		/**
-		 * Fetch all images
-		 */
-		$dom_href_item = $dom_xpath->query( '//a' );
-		if ( ! is_null( $dom_href_item ) ) {
-			foreach ( $dom_href_item as $href_element ) {
-
-				$the_item_url   = $href_element->getAttribute( 'href' );
-				$the_href_blank = $href_element->getAttribute( 'target' );
-				$the_rel_target = $href_element->getAttribute( 'rel' );
-				if (
-					! empty( $the_item_url ) &&
-					filter_var( $the_item_url, FILTER_VALIDATE_URL ) &&
-					false === strpos( $the_item_url, $home_url ) &&
-					false !== strpos( $the_href_blank, '_blank' )
-				) {
-
-					if ( is_null( $the_rel_target ) ) {
-						$href_element->removeAttribute( 'rel' );
-						$href_element->setAttribute( 'rel', $replacement_rel );
-					} else {
-						$href_element->removeAttribute( 'rel' );
-						if ( false === strpos( $the_rel_target, 'noopener' ) && false === strpos( $the_rel_target, 'noreferrer' ) ) {
-							$replacement_rel = 'noopener noreferrer';
-						} elseif ( false === strpos( $the_rel_target, 'noreferrer' ) && false !== strpos( $the_rel_target, 'noopener' ) ) {
-							$replacement_rel = $noreferrer_rel;
-						} elseif ( false === strpos( $the_rel_target, 'noopener' ) && false !== strpos( $the_rel_target, 'noreferrer' ) ) {
-							$replacement_rel = $noopener_rel;
-						} else {
-							$replacement_rel = '';
-						}
-						$the_rel_target .= ' ' . $replacement_rel;
-						$href_element->setAttribute( 'rel', $the_rel_target );
-
-					}
-				}
-			}
-		}
-		//$buffer = $html_dom->saveHTML( $html_dom->documentElement );
-		$content_return = $html_dom->saveHTML();
-
-		if ( ! empty( $script_matches ) && ! empty( $script_matches[0][0] ) ) {
-			foreach ( $script_matches[0] as $index => $script_js ) {
-				$content_return = str_replace( '<!--{BREEZE_SCRIPT_PH' . $index . '}-->', $script_js, $content_return );
-			}
-		}
-
-		$buffer = $content_return;
-		// ------------------------------------------------------------------------------------------
+		// Regular expression pattern to match anchor (a) tags
+		$pattern = '/<a\s+(.*?)>/si';
+		$buffer = preg_replace_callback( $pattern, 'breeze_cc_process_match', $buffer );
 
 	}
 
@@ -377,6 +310,10 @@ function breeze_cache( $buffer, $flags ) {
 			'headers' => $headers,
 		)
 	);
+
+
+	// Filter to modify cache buffer after caching
+	$buffer = apply_filters('breeze_cache_buffer_after_processing', $buffer);
 
 	//cache per users
 	if ( is_user_logged_in() ) {

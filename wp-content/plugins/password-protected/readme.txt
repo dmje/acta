@@ -2,9 +2,9 @@
 Contributors: wpexpertsio
 Tags: password, protect, password protect, login
 Requires at least: 4.6
-Tested up to: 6.1.1
+Tested up to: 6.2.2
 Requires PHP: 5.6
-Stable tag: 2.6.2
+Stable tag: 2.6.3.1
 License: GPLv2 or later
 
 The ultimate password protection plugin that protects your WordPress site with a single password.
@@ -138,6 +138,14 @@ If you would like to translate this plugin you can easily contribute at the [Tra
 4. Password Protected advanced settings page.
 
 == Changelog ==
+= 2.6.3.1 =
+- Fix - Parse error related to PHP version 7.2
+
+= 2.6.3 =
+- New - Added Freemius SDK integration.
+- New - Added functionality to login with transient if the cookies are blocked.
+- Fix – Fixed Redirect Issue from excluded page to password protected page.
+
 = 2.6.2 =
 - Fix – Parse error related to PHP version 7.2
 

@@ -13,6 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 final class Breeze_CloudFlare_Helper {
 
+	private $cw_platform = '';
+
 	function __construct() {
 		add_action( 'switch_theme', array( &$this, 'clear_cf_on_changing_theme' ), 11, 3 );
 	}
@@ -28,11 +30,37 @@ final class Breeze_CloudFlare_Helper {
 		if ( false === self::is_cloudflare_enabled() ) {
 			return false;
 		}
-
+		$fpc_microservice_url = ''; // default
 		/**
 		 * Contains the dynamic microservice URL.
 		 */
-		$fpc_microservice_url = getenv( 'FPC_ENV' );
+		if ( true === self::is_fp_server() ) {
+			$this->cw_platform    = 'fp';
+			$fpc_microservice_url = getenv( 'FPC_ENV' ); // TODO Add the hardcoded link for Flexible (stating|production).
+
+			if ( true === self::is_log_enabled() ) {
+				$server_type_text = '';
+				if ( true === self::is_staging_server() ) {
+					$server_type_text = 'Staging';
+				}
+
+				if ( true === self::is_production_server() ) {
+					$server_type_text = 'Production';
+				}
+
+				error_log( 'Cloudways FP (Flexible) is ON: ' . $server_type_text );
+			}
+		} elseif ( ! empty( getenv( 'FPC_ENV' ) ) ) {
+			$this->cw_platform    = 'fmp';
+			$fpc_microservice_url = getenv( 'FPC_ENV' );// FMP
+			if ( true === self::is_log_enabled() ) {
+				error_log( 'Cloudways FMP (Autoscale) is ON ' );
+			}
+		}
+
+		if ( true === self::is_log_enabled() ) {
+			error_log( 'Microservice URL: ' . var_export( $fpc_microservice_url, true ) );
+		}
 
 		if ( empty( $fpc_microservice_url ) ) {
 			return false;
@@ -214,6 +242,8 @@ final class Breeze_CloudFlare_Helper {
 	 * @static
 	 */
 	static public function is_cloudflare_enabled(): bool {
+		$return_value = true;
+
 		if (
 			! defined( 'CDN_SITE_ID' ) ||
 			! defined( 'CDN_SITE_TOKEN' )
@@ -222,10 +252,123 @@ final class Breeze_CloudFlare_Helper {
 				error_log( 'Error: CDN_SITE_ID or CDN_SITE_TOKEN not defined' );
 			}
 
+			$return_value = false;
+		}
+
+		if ( false === self::is_cloudways_server() ) {
+			$return_value = false;
+		}
+
+		return $return_value;
+	}
+
+	/**
+	 * Detect if it's Cloudways server.
+	 *
+	 * @return bool
+	 * @access public
+	 * @since 2.0.19
+	 */
+	static public function is_cloudways_server(): bool {
+
+		if (
+			false !== strpos( $_SERVER['DOCUMENT_ROOT'], 'cloudwaysapps' ) ||
+			false !== strpos( $_SERVER['DOCUMENT_ROOT'], 'cloudwaysstagingapps' ) ||
+			! empty( getenv( 'FPC_ENV' ) )
+		) {
+			return true;
+		}
+
+		return false;
+	}
+
+	static public function is_fmp_server(): bool {
+
+		if (
+			! empty( getenv( 'FPC_ENV' ) ) &&
+			isset( $_SERVER['HTTP_CF_WORKER'] )
+		) {
+
+			if ( true === self::is_log_enabled() ) {
+				if ( false !== strpos( getenv( 'FPC_ENV' ), 'uat-' ) ) {
+					error_log( '# Microservice Server URL UAT: ON ' );
+				}
+
+				if ( false !== strpos( getenv( 'FPC_ENV' ), 'stg-' ) ) {
+					error_log( '# Microservice Server URL STG: ON ' );
+				}
+
+				if ( false !== strpos( getenv( 'FPC_ENV' ), 'dev-' ) ) {
+					error_log( '# Microservice Server URL DEV: ON ' );
+				}
+
+				if ( false !== strpos( getenv( 'FPC_ENV' ), 'prod-' ) ) {
+					error_log( '# Microservice Server URL PROD: ON ' );
+				}
+			}
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Detect if it's Cloudways staging server.
+	 *
+	 * @return bool
+	 * @access public
+	 * @since 2.0.19
+	 */
+	static public function is_staging_server(): bool {
+
+		if (
+			false !== strpos( $_SERVER['DOCUMENT_ROOT'], 'cloudwaysstagingapps.com' )
+		) {
+			if ( true === self::is_log_enabled() ) {
+				error_log( 'Cloudways Staging ON ' );
+			}
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Detect if it's Cloudways staging server.
+	 *
+	 * @return bool
+	 * @access public
+	 * @since 2.0.19
+	 */
+	static public function is_production_server(): bool {
+
+		if (
+			false !== strpos( $_SERVER['DOCUMENT_ROOT'], 'cloudwaysapps.com' )
+		) {
+			if ( true === self::is_log_enabled() ) {
+				error_log( 'Cloudways Production ON ' );
+			}
+
+			return true;
+		}
+
 			return false;
 		}
 
+	/**
+	 * Check if the server type is FP ( Flexible ).
+	 *
+	 * @return bool
+	 * @since 2.0.15
+	 */
+	static public function is_fp_server(): bool {
+		if ( true === self::is_staging_server() || true === self::is_production_server() ) {
 		return true;
+	}
+
+		return false;
 	}
 
 	/**
@@ -246,6 +389,8 @@ final class Breeze_CloudFlare_Helper {
 		) {
 			return;
 		}
+
+		self::is_fmp_server();
 
 		// Remove any white spaces from URL list.
 		$purge_url_list = array_map( 'trim', $purge_url_list );
@@ -306,9 +451,11 @@ final class Breeze_CloudFlare_Helper {
 			'urls'     => $purge_url_list,
 			'appToken' => CDN_SITE_TOKEN,
 			'appId'    => CDN_SITE_ID,
+			'platform' => $this->cw_platform,
 		);
 		if ( true === self::is_log_enabled() ) {
 			error_log( 'List of URL(s) to be sent: ' . var_export( $data_to_send['urls'], true ) );
+			error_log( 'Platform used : ' . var_export( strtoupper( $this->cw_platform ), true ) );
 		}
 
 		// Convert data to JSON.

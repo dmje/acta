@@ -152,7 +152,9 @@ class Breeze_WP_Cli_Core extends \WP_CLI_Command {
 						Breeze_CloudFlare_Helper::reset_all_cache( $list_of_urls );
 					}
 				}
-
+				WP_CLI::success(
+					__( 'Cloudflare cache has been purged.', 'breeze' )
+				);
 			}
 
 			if ( 'local' === $assoc_args['cache'] ) {

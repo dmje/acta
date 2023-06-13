@@ -274,6 +274,13 @@ class Breeze_Admin {
 		} else {
 			$current_screen_url = admin_url( basename( $_SERVER['REQUEST_URI'] ) );
 		}
+
+		if(true === $is_network){
+			$current_screen_url = network_admin_url( basename( $_SERVER['REQUEST_URI'] ) );
+			// particular fix when network is found twice in the url.
+			$current_screen_url = str_replace('network/network','network/',$current_screen_url);
+		}
+
 		$current_screen_url = remove_query_arg( array(
 			'breeze_purge',
 			'_wpnonce',

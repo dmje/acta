@@ -4,7 +4,7 @@ Tags: cache,caching, performance, wp-cache, cdn, combine, compress, speed plugin
 Requires at least: 6.0
 Tested up to: 6.2
 Requires PHP: 7.4
-Stable tag: 2.0.21
+Stable tag: 2.0.24
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -144,6 +144,21 @@ Yes. The process of setting up CloudFlare with Breeze is easy. Check out the fol
 Using Gzip, Breeze compresses the request files, further reducing the size of the download files and speeding up the user experience.
 
 == Changelog ==
+
+= 2.0.24 =
+
+* Fix: Handling of the 'WP_Upgrader_Skin' class for seamless update functionality via wp-cli.
+
+= 2.0.23 =
+
+* Add: Smart Cache Purge Configuration for Cloudflare is now available for Flexible Platform for Cloudways users.
+* Add: Environment detection is now available for Cloudways users to automatically detect the platform, e.g., Flexible or Autoscale.
+* Add: Filters are added to interact with the content buffer before cache files are created. Use a filter called "breeze_cache_buffer_before_processing" to interact with buffer content before performing any changes and "breeze_cache_buffer_after_processing" after markup changes are finished.
+
+
+= 2.0.22=
+
+* Fix: Issues with Lazy Load and Cross-origin have been fixed by rewriting the engine to avoid interfering with bad markup.
 
 = 2.0.21=
 
