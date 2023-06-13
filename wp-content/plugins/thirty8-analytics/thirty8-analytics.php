@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
  * Plugin Name: Thirty8 Analytics and cookie popup helper
  * Plugin URI: http://thirty8.co.uk
  * Description: Easy analytics and cookie popup
- * Version: 1.0
+ * Version: 1.1
  * Author: Mike Ellis / Thirty8 Digital
  */
 
