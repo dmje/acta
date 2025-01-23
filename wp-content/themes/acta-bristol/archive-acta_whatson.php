@@ -39,96 +39,117 @@ get_header();
    		 * @since 3.1.0
    		 */
    		do_action('generate_before_loop', 'archive');
+       ?>
+       
+       
+       <?php 
+       
+       $today = date('Ymd');
+       
+       ?>
+       
 
-   		// The Loop
+       <div class="whatson-container">
+         
+          <div class="whatson-present">
+            
+            <h2>Current Productions</h2>
+            
+            <?php 
 
-   		echo '<div class="whatson-container">';
+            $args = [
+               'post_type' => 'acta_whatson',
+               'meta_query' => [
+                 [
+                   'key' => 'end_date',
+                   'value' => $today,
+                   'compare' => '>=',
+                   'type' => 'DATE',
+                 ],
+               ],
+               'meta_key' => 'end_date',
+               'orderby' => 'meta_value',
+               'order' => 'ASC',
+             ];
+            
+             // Run the query
+             $query = new WP_Query($args);
+            
+             // Check if there are any posts
+             if ($query->have_posts()) {
+               // Loop through the posts
+               while ($query->have_posts()) {
+                 $query->the_post();
+                 // Display the post content
+                 get_template_part('partials/acta_whatson', 'archive');
+               }
+             }
+            
+             // Reset the post data
+             wp_reset_postdata();
+            
+            
+            ?>
+            
+            
+          </div>  
+         
+          <div class="whatson-past">
+            
+            <h2>Previous Productions</h2>
+            
+            <?php 
+            
+            $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+            
+             $args = [
+               'post_type' => 'acta_whatson',
+               'meta_query' => [
+                 [
+                   'key' => 'end_date',
+                   'value' => $today,
+                   'compare' => '<',
+                   'type' => 'DATE',
+                 ],
+               ],
+               'meta_key' => 'end_date',
+               'orderby' => 'meta_value',
+               'order' => 'DESC',
+               'paged' => $paged,
+             ];
+            
+             // Run the query
+             $query = new WP_Query($args);
+            
+             // Check if there are any posts
+             if ($query->have_posts()) {
+               // Loop through the posts
+               while ($query->have_posts()) {
+                 $query->the_post();
+                 // Display the post content
+                 get_template_part('partials/acta_whatson', 'archive');
+               }
+             }
+            
+             // Reset the post data
+             wp_reset_postdata();
+            
+            
+            ?>
+            
+          </div>
+         
+         
+       </div>
+       
+       
 
-   		// Get present and future events ----------------------------
-   		$today = date('Ymd');
-
-   		echo '<div class="whatson-present">';
-
-   		echo '<h2>Current Productions</h2>';
-
-   		// Set up the query arguments
-   		$args = [
-   			'post_type' => 'acta_whatson',
-   			'meta_query' => [
-   				[
-   					'key' => 'end_date',
-   					'value' => $today,
-   					'compare' => '>=',
-   					'type' => 'DATE',
-   				],
-   			],
-   			'meta_key' => 'end_date',
-   			'orderby' => 'meta_value',
-   			'order' => 'ASC',
-   		];
-
-   		// Run the query
-   		$query = new WP_Query($args);
-
-   		// Check if there are any posts
-   		if ($query->have_posts()) {
-   			// Loop through the posts
-   			while ($query->have_posts()) {
-   				$query->the_post();
-   				// Display the post content
-   				get_template_part('partials/acta_whatson', 'archive');
-   			}
-   		}
-
-   		// Reset the post data
-   		wp_reset_postdata();
-
-   		echo '</div>';
-
-   		// Get past events ----------------------------
-   		$today = date('Ymd');
-
-   		echo '<div class="whatson-past">';
-
-   		echo '<h2>Previous Productions</h2>';
-
-   		// Set up the query arguments
-   		$args = [
-   			'post_type' => 'acta_whatson',
-   			'meta_query' => [
-   				[
-   					'key' => 'end_date',
-   					'value' => $today,
-   					'compare' => '<',
-   					'type' => 'DATE',
-   				],
-   			],
-   			'meta_key' => 'end_date',
-   			'orderby' => 'meta_value',
-   			'order' => 'DESC',
-   		];
-
-   		// Run the query
-   		$query = new WP_Query($args);
-
-   		// Check if there are any posts
-   		if ($query->have_posts()) {
-   			// Loop through the posts
-   			while ($query->have_posts()) {
-   				$query->the_post();
-   				// Display the post content
-   				get_template_part('partials/acta_whatson', 'archive');
-   			}
-   		}
-
-   		// Reset the post data
-   		wp_reset_postdata();
-
-   		echo '</div>';
-
-   		echo '</div>'; //container
-
+   		
+       <?php 
    		do_action('generate_after_loop', 'archive');
+       
+       
+       
    	else:
    		generate_do_template_part('none');
    	endif;
